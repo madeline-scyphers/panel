@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Streaming Trend</title>
+<link rel="icon" href="https://panel.holoviz.org/_static/icons/favicon.ico" type=""><link rel="manifest" href="site.webmanifest"><meta name="name" content="Streaming Trend">    <link rel="stylesheet" href="https://cdn.holoviz.org/panel/0.14.4/dist/css/card.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.holoviz.org/panel/0.14.4/dist/css/json.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.holoviz.org/panel/0.14.4/dist/css/dataframe.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.holoviz.org/panel/0.14.4/dist/css/loading.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.holoviz.org/panel/0.14.4/dist/css/widgets.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.holoviz.org/panel/0.14.4/dist/css/debugger.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.holoviz.org/panel/0.14.4/dist/css/alerts.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.holoviz.org/panel/0.14.4/dist/css/markdown.css" type="text/css" />
+    <style>
+        
+    .bk.pn-loading.arc:before {
+      background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHN0eWxlPSJtYXJnaW46IGF1dG87IGJhY2tncm91bmQ6IG5vbmU7IGRpc3BsYXk6IGJsb2NrOyBzaGFwZS1yZW5kZXJpbmc6IGF1dG87IiB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ieE1pZFlNaWQiPiAgPGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYzNjM2MzIiBzdHJva2Utd2lkdGg9IjEwIiByPSIzNSIgc3Ryb2tlLWRhc2hhcnJheT0iMTY0LjkzMzYxNDMxMzQ2NDE1IDU2Ljk3Nzg3MTQzNzgyMTM4Ij4gICAgPGFuaW1hdGVUcmFuc2Zvcm0gYXR0cmlidXRlTmFtZT0idHJhbnNmb3JtIiB0eXBlPSJyb3RhdGUiIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIiBkdXI9IjFzIiB2YWx1ZXM9IjAgNTAgNTA7MzYwIDUwIDUwIiBrZXlUaW1lcz0iMDsxIj48L2FuaW1hdGVUcmFuc2Zvcm0+ICA8L2NpcmNsZT48L3N2Zz4=");
+      background-size: auto calc(min(50%, 400px));
+    }
+    
+    </style>
+
+<script type="text/javascript">
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./serviceWorker.js').then(reg => {
+    reg.onupdatefound = () => {
+      const installingWorker = reg.installing;
+      installingWorker.onstatechange = () => {
+        if (installingWorker.state === 'installed' &&
+            navigator.serviceWorker.controller) {
+          // Reload page if service worker is replaced
+          location.reload();
+        }
+      }
+    }
+  })
+}
+</script>
+
+<script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-2.4.3.min.js"></script><script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-gl-2.4.3.min.js"></script><script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-widgets-2.4.3.min.js"></script><script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-tables-2.4.3.min.js"></script><script type="text/javascript" src="https://cdn.holoviz.org/panel/0.14.4/dist/panel.min.js"></script><script type="text/javascript">
+    Bokeh.set_log_level("info");
+</script><!-- Template CSS -->
+<link rel="stylesheet" href="https://cdn.holoviz.org/panel/0.14.4/dist/bundled/fastbasetemplate/fast_root.css">
+<link rel="stylesheet" href="https://cdn.holoviz.org/panel/0.14.4/dist/bundled/fastbasetemplate/fast_bokeh.css">
+<link rel="stylesheet" href="https://cdn.holoviz.org/panel/0.14.4/dist/bundled/fastbasetemplate/fast_bokeh_slickgrid.css">
+<link rel="stylesheet" href="https://cdn.holoviz.org/panel/0.14.4/dist/bundled/fastbasetemplate/fast_panel.css">
+<link rel="stylesheet" href="https://cdn.holoviz.org/panel/0.14.4/dist/bundled/fastbasetemplate/fast_panel_dataframe.css">
+<link rel="stylesheet" href="https://cdn.holoviz.org/panel/0.14.4/dist/bundled/fastbasetemplate/fast_panel_widgets.css">
+<link rel="stylesheet" href="https://cdn.holoviz.org/panel/0.14.4/dist/bundled/fastbasetemplate/fast_panel_markdown.css">
+<link rel="stylesheet" href="https://cdn.holoviz.org/panel/0.14.4/dist/bundled/fastbasetemplate/fast_awesome.css">
+<link rel="stylesheet" href="https://cdn.holoviz.org/panel/0.14.4/dist/bundled/fastlisttemplate/fast_list_template.css">
+<link rel="stylesheet" href="https://cdn.holoviz.org/panel/0.14.4/dist/bundled/fastdefaulttheme/fast_root_default.css">
+<link rel="stylesheet" href="https://cdn.holoviz.org/panel/0.14.4/dist/bundled/fastlisttemplate/default.css">
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
+
+<style>
+  :root {
+    --body-font: Open Sans, sans-serif;
+  }
+  body {
+    color: #00aa41;
+    background-color: #ffffff;
+    font-family: var(--body-font);
+  }
+  #header a {
+    color: currentColor;
+  }
+  #header-design-provider {
+    --neutral-foreground-rest: #ffffff;
+  }
+  #sidebar {
+    width: 330px;
+  }
+  #header {
+      box-shadow: 2px 2px 10px silver;
+  }
+  #sidebar {
+      box-shadow: 2px 2px 10px silver;
+  }
+</style>
+
+<!-- Template JS -->
+<script src="https://cdn.holoviz.org/panel/0.14.4/dist/bundled/fastbasetemplate/fast_template.js"></script>
+<script src="https://cdn.holoviz.org/panel/0.14.4/dist/bundled/js/@microsoft/fast-colors@5.3.1/dist/index.js" type="module"></script>
+<script src="https://cdn.holoviz.org/panel/0.14.4/dist/bundled/js/@microsoft/fast-components@1.21.8/dist/fast-components.js" type="module"></script>
+
+<!-- Fast Script -->
+<script type="module">
+  import { parseColorHexRGB } from "https://cdn.holoviz.org/panel/0.14.4/dist/bundled/js/@microsoft/fast-colors@5.3.1/dist/index.js";
+  import {
+    createColorPalette,
+    accentFillActiveBehavior,
+    accentFillHoverBehavior,
+    accentFillRestBehavior,
+    accentForegroundActiveBehavior,
+    accentForegroundCutRestBehavior,
+    accentForegroundFocusBehavior,
+    accentForegroundHoverBehavior,
+    accentForegroundRestBehavior,
+    neutralDividerRestBehavior,
+    neutralFillHoverBehavior,
+    neutralFillInputActiveBehavior,
+    neutralFillInputHoverBehavior,
+    neutralFillInputRestBehavior,
+    neutralFillRestBehavior,
+    neutralFillStealthActiveBehavior,
+    neutralFillStealthHoverBehavior,
+    neutralFillStealthRestBehavior,
+    neutralFocusBehavior,
+    neutralFocusInnerAccentBehavior,
+    neutralForegroundActiveBehavior,
+    neutralForegroundHoverBehavior,
+    neutralLayerFloatingBehavior,
+    neutralOutlineActiveBehavior,
+    neutralOutlineHoverBehavior,
+    neutralOutlineRestBehavior
+  } from "https://cdn.holoviz.org/panel/0.14.4/dist/bundled/js/@microsoft/fast-components@1.21.8/dist/fast-components.js";
+
+  function standardize_color(str){
+    var ctx = document.createElement('canvas').getContext('2d');
+    ctx.fillStyle = str;
+    return ctx.fillStyle;
+  }
+
+  function setAccentColor(color, selector){
+      color = standardize_color(color);
+      const accent = color;
+      const palette = createColorPalette(parseColorHexRGB(accent));
+      const provider = document.querySelector(selector);
+      provider.accentBaseColor = accent;
+      provider.accentPalette = palette;
+  }
+  setAccentColor("#0072B5", "#body-design-provider");
+  setAccentColor("#ffffff", "#header-design-provider");
+
+  function setNeutralColor(color, selector){
+      color = standardize_color(color);
+      const palette = createColorPalette(parseColorHexRGB(color));
+      const provider = document.querySelector(selector);
+
+      provider.neutralPalette = palette;
+  }
+  setNeutralColor("#ffffff", "#header-design-provider");
+  setNeutralColor("#000000", "#body-design-provider");
+
+  function setBackgroundColor(color, selector){
+    color = standardize_color(color);
+    const provider = document.querySelector(selector);
+    provider.backgroundColor=color;
+  }
+  setBackgroundColor("#0072B5", "#header-design-provider");
+  setBackgroundColor("#ffffff", "#body-design-provider");
+
+  document.querySelector("#body-design-provider").cornerRadius=3;
+
+  function registerCSSCustomProperties(selector)  {
+    const provider = document.querySelector(selector);
+    provider.registerCSSCustomProperty(accentFillActiveBehavior)
+    provider.registerCSSCustomProperty(neutralFillRestBehavior)
+    provider.registerCSSCustomProperty(accentFillHoverBehavior)
+    provider.registerCSSCustomProperty(accentFillRestBehavior)
+    provider.registerCSSCustomProperty(accentForegroundActiveBehavior)
+    provider.registerCSSCustomProperty(accentForegroundCutRestBehavior)
+    provider.registerCSSCustomProperty(accentForegroundFocusBehavior)
+    provider.registerCSSCustomProperty(accentForegroundHoverBehavior)
+    provider.registerCSSCustomProperty(accentForegroundRestBehavior)
+    provider.registerCSSCustomProperty(neutralDividerRestBehavior)
+    provider.registerCSSCustomProperty(neutralFillHoverBehavior)
+    provider.registerCSSCustomProperty(neutralFillInputActiveBehavior)
+    provider.registerCSSCustomProperty(neutralFillInputHoverBehavior)
+    provider.registerCSSCustomProperty(neutralFillInputRestBehavior)
+    provider.registerCSSCustomProperty(neutralFillRestBehavior)
+    provider.registerCSSCustomProperty(neutralFillStealthActiveBehavior)
+    provider.registerCSSCustomProperty(neutralFillStealthHoverBehavior)
+    provider.registerCSSCustomProperty(neutralFillStealthRestBehavior)
+    provider.registerCSSCustomProperty(neutralFocusBehavior)
+    provider.registerCSSCustomProperty(neutralFocusInnerAccentBehavior)
+    provider.registerCSSCustomProperty(neutralForegroundActiveBehavior)
+    provider.registerCSSCustomProperty(neutralForegroundHoverBehavior)
+    provider.registerCSSCustomProperty(neutralLayerFloatingBehavior)
+    provider.registerCSSCustomProperty(neutralOutlineActiveBehavior)
+    provider.registerCSSCustomProperty(neutralOutlineHoverBehavior)
+    provider.registerCSSCustomProperty(neutralOutlineRestBehavior)
+  }
+  registerCSSCustomProperties("#header-design-provider")
+  registerCSSCustomProperties("#body-design-provider")
+
+  class FastDesignProvider {
+    setAccentColor(value, element){
+      setAccentColor(value, element);
+    }
+    setNeutralColor(value, element){
+      setNeutralColor(value, element);
+    }
+    setBackgroundColor(value, element){
+      setBackgroundColor(value, element)
+    }
+  }
+  window.fastDesignProvider = new FastDesignProvider()
+</script>
+  </head>
+  <body class="bk pn-loading arc">
+<fast-design-system-provider id="body-design-provider" use-defaults accent-foreground-cut-rest="#FFFFFF"
+background-color="#ffffff"accent-base-color="#0072B5"  >
+  <div id="container">
+  <fast-design-system-provider id="header-design-provider"
+background-color="#0072B5"  >
+  <nav id="header">
+    <div class="app-header">
+<a class="title" href="/" >&nbsp;Panel</a><span class="title">-</span><a class="title" href="" >Streaming Trend</a>    </div>
+    <div id="header-items">
+  </div>
+  <div class="pn-toggle-theme">
+    <fast-switch id="theme-switch" style="float: right;" onChange="toggleLightDarkTheme('default')" checked>
+      <span slot="checked-message">
+        <svg class="theme-toggle-icon" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25"><path d="M0 0h24v24H0z" fill="none"/><path d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.79 1.42-1.41zM4 10.5H1v2h3v-2zm9-9.95h-2V3.5h2V.55zm7.45 3.91l-1.41-1.41-1.79 1.79 1.41 1.41 1.79-1.79zm-3.21 13.7l1.79 1.8 1.41-1.41-1.8-1.79-1.4 1.4zM20 10.5v2h3v-2h-3zm-8-5c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm-1 16.95h2V19.5h-2v2.95zm-7.45-3.91l1.41 1.41 1.79-1.8-1.41-1.41-1.79 1.8z"/></svg>
+      </span>
+      <span slot="unchecked-message">
+        <svg class="theme-toggle-icon" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25"><path d="M0 0h24v24H0z" fill="none"/><path d="M10 2c-1.82 0-3.53.5-5 1.35C7.99 5.08 10 8.3 10 12s-2.01 6.92-5 8.65C6.47 21.5 8.18 22 10 22c5.52 0 10-4.48 10-10S15.52 2 10 2z"/></svg>
+      </span>
+    </fast-switch>
+    <fast-tooltip anchor="theme-switch" position="bottom">
+      Toggle the Theme
+    </fast-tooltip>
+  </div>
+	<div class="pn-busy-container" id="busy-container">
+	  <div class="bk-root" id="40a00742-52f7-4642-9518-0db98de46ea9" data-root-id="1008"></div>
+	</div>
+  <fast-tooltip anchor="busy-container" position="left">
+    Busy Indicator
+  </fast-tooltip>
+
+  </nav>
+  </fast-design-system-provider>
+
+  <div class="row" id="content">
+
+    <div class="main" id="main"
+    style="margin-left: 0px;"
+    >
+      <div class="card-margin">
+<fast-card class="pn-wrapper">        <span class="fullscreen-button" onclick="toggleFullScreen(this)">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18"><path d="M4.5 11H3v4h4v-1.5H4.5V11zM3 7h1.5V4.5H7V3H3v4zm10.5 6.5H11V15h4v-4h-1.5v2.5zM11 3v1.5h2.5V7H15V3h-4z"/></svg>
+        </span>
+        <div class="bk-root" id="ac739e0d-2936-413b-8d2d-479061dea81f" data-root-id="1009"></div>
+</fast-card>      </div>
+      <div class="card-margin">
+<fast-card class="pn-wrapper">        <span class="fullscreen-button" onclick="toggleFullScreen(this)">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18"><path d="M4.5 11H3v4h4v-1.5H4.5V11zM3 7h1.5V4.5H7V3H3v4zm10.5 6.5H11V15h4v-4h-1.5v2.5zM11 3v1.5h2.5V7H15V3h-4z"/></svg>
+        </span>
+        <div class="bk-root" id="bf301f86-32e5-4d54-993b-1386f045cdf2" data-root-id="1010"></div>
+</fast-card>      </div>
+      <div class="card-margin">
+<fast-card class="pn-wrapper">        <span class="fullscreen-button" onclick="toggleFullScreen(this)">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18"><path d="M4.5 11H3v4h4v-1.5H4.5V11zM3 7h1.5V4.5H7V3H3v4zm10.5 6.5H11V15h4v-4h-1.5v2.5zM11 3v1.5h2.5V7H15V3h-4z"/></svg>
+        </span>
+        <div class="bk-root" id="3864b5b9-9603-46b3-a59b-ff3ab3f84537" data-root-id="1014"></div>
+</fast-card>      </div>
+
+      <fast-dialog id="pn-Modal" hidden style="--dialog-width: 80%; --dialog-height: auto; --background-color: var(--neutral-layer-floating);">
+        <fast-button class="pn-modal-close" id="pn-closeModal">&times;</fast-button>
+	<div>
+	</div>
+      </fast-dialog>
+  </div>
+  </div>
+</div>
+</fast-design-system-provider>
+<script>
+  
+</script>
+<script>
+  function openNav() {
+    document.getElementById("sidebar").style.left = 0;
+    document.getElementById("main").style.marginLeft = "360px";
+    document.getElementById("sidebar-button").onclick = closeNav;
+    var interval = setInterval(function () { window.dispatchEvent(new Event('resize')); }, 10);
+    setTimeout(function () { clearInterval(interval) }, 210)
+  }
+
+  function closeNav() {
+    document.getElementById("sidebar").style.left = "-360px";
+    document.getElementById("main").style.marginLeft = 0;
+    document.getElementById("sidebar-button").onclick = openNav;
+    var interval = setInterval(function () { window.dispatchEvent(new Event('resize')); }, 10);
+    setTimeout(function () { clearInterval(interval) }, 210)
+  }
+
+  var modal = document.getElementById("pn-Modal");
+  var span = document.getElementById("pn-closeModal");
+
+  span.onclick = function() {
+    modal.style.display = "none";
+  }
+
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+</script>
+
+<div class="bk-root" id="1d322935-74e0-4454-9480-ab56b6edee8e" data-root-id="1005"></div>
+<div class="bk-root" id="c6adc419-b499-4815-95e7-dad2f5135f39" data-root-id="1007"></div>
+<div class="bk-root" id="e74a4d69-fa3f-4f72-83d4-835b8fbd3256" data-root-id="1003"></div>
+
+  
+    <script type="text/javascript">
+      const pyodideWorker = new Worker("./streaming_indicator.js");
+      pyodideWorker.busy = false
+      pyodideWorker.queue = []
+      
+      function send_change(jsdoc, event) {
+        if (event.setter_id != null && event.setter_id == 'py') {
+          return
+        } else if (pyodideWorker.busy && event.model && event.attr) {
+          let events = []
+          for (const old_event of pyodideWorker.queue) {
+            if (!(old_event.model === event.model && old_event.attr === event.attr)) {
+              events.push(old_event)
+            }
+          }
+          events.push(event)
+          pyodideWorker.queue = events
+          return
+        }
+        const patch = jsdoc.create_json_patch_string([event])
+        pyodideWorker.busy = true
+        pyodideWorker.postMessage({type: 'patch', patch: patch})
+      }
+      
+      pyodideWorker.onmessage = async (event) => {
+        const msg = event.data
+      
+        const body = document.getElementsByTagName('body')[0]
+        const loading_msgs = document.getElementsByClassName('pn-loading-msg')
+        if (msg.type === 'idle') {
+          if (pyodideWorker.queue.length) {
+            const patch = pyodideWorker.jsdoc.create_json_patch_string(pyodideWorker.queue)
+            pyodideWorker.busy = true
+            pyodideWorker.queue = []
+            pyodideWorker.postMessage({type: 'patch', patch: patch})
+          } else {
+            pyodideWorker.busy = false
+          }
+        } else if (msg.type === 'status') {
+          let loading_msg
+          if (loading_msgs.length) {
+            loading_msg = loading_msgs[0]
+          } else if (body.classList.contains('pn-loading')) {
+            loading_msg = document.createElement('div')
+            loading_msg.classList.add('pn-loading-msg')
+            body.appendChild(loading_msg)
+          }
+          if (loading_msg != null) {
+            loading_msg.innerHTML = msg.msg
+          }
+        } else if (msg.type === 'render') {
+          const docs_json = JSON.parse(msg.docs_json)
+          const render_items = JSON.parse(msg.render_items)
+          const root_ids = JSON.parse(msg.root_ids)
+      
+          // Remap roots in message to element IDs
+          const root_els = document.getElementsByClassName('bk-root')
+          const data_roots = []
+          for (const el of root_els) {
+             el.innerHTML = ''
+             data_roots.push([parseInt(el.getAttribute('data-root-id')), el.id])
+          }
+          data_roots.sort((a, b) => a[0]<b[0] ? -1: 1)
+          const roots = {}
+          for (let i=0; i<data_roots.length; i++) {
+            roots[root_ids[i]] = data_roots[i][1]
+          }
+          render_items[0]['roots'] = roots
+          render_items[0]['root_ids'] = root_ids
+      
+          // Embed content
+          const [views] = await Bokeh.embed.embed_items(docs_json, render_items)
+      
+          // Remove loading spinner and message
+          body.classList.remove("bk", "pn-loading", "arc")
+          for (const loading_msg of loading_msgs) {
+            loading_msg.remove()
+          }
+      
+          // Setup bi-directional syncing
+          pyodideWorker.jsdoc = jsdoc = views[0].model.document
+          jsdoc.on_change(send_change.bind(null, jsdoc), false)
+          pyodideWorker.postMessage({'type': 'rendered'})
+          pyodideWorker.postMessage({'type': 'location', location: JSON.stringify(window.location)})
+        } else if (msg.type === 'patch') {
+          pyodideWorker.jsdoc.apply_json_patch(JSON.parse(msg.patch), msg.buffers, setter_id='py')
+        }
+      };
+    </script>
+    <script type="application/json" id="1591">
+      {"74179ff9-9eae-42af-a87e-65f9e6ddae48":{"defs":[{"extends":null,"module":null,"name":"ReactiveHTML1","overrides":[],"properties":[]},{"extends":null,"module":null,"name":"FlexBox1","overrides":[],"properties":[{"default":"flex-start","kind":null,"name":"align_content"},{"default":"flex-start","kind":null,"name":"align_items"},{"default":"row","kind":null,"name":"flex_direction"},{"default":"wrap","kind":null,"name":"flex_wrap"},{"default":"flex-start","kind":null,"name":"justify_content"}]},{"extends":null,"module":null,"name":"GridStack1","overrides":[],"properties":[{"default":"warn","kind":null,"name":"mode"},{"default":null,"kind":null,"name":"ncols"},{"default":null,"kind":null,"name":"nrows"},{"default":true,"kind":null,"name":"allow_resize"},{"default":true,"kind":null,"name":"allow_drag"},{"default":[],"kind":null,"name":"state"}]},{"extends":null,"module":null,"name":"click1","overrides":[],"properties":[{"default":"","kind":null,"name":"terminal_output"},{"default":"","kind":null,"name":"debug_name"},{"default":0,"kind":null,"name":"clears"}]},{"extends":null,"module":null,"name":"NotificationAreaBase1","overrides":[],"properties":[{"default":"bottom-right","kind":null,"name":"position"},{"default":0,"kind":null,"name":"_clear"}]},{"extends":null,"module":null,"name":"NotificationArea1","overrides":[],"properties":[{"default":[],"kind":null,"name":"notifications"},{"default":"bottom-right","kind":null,"name":"position"},{"default":0,"kind":null,"name":"_clear"},{"default":[{"background":"#ffc107","icon":{"className":"fas fa-exclamation-triangle","color":"white","tagName":"i"},"type":"warning"},{"background":"#007bff","icon":{"className":"fas fa-info-circle","color":"white","tagName":"i"},"type":"info"}],"kind":null,"name":"types"}]},{"extends":null,"module":null,"name":"Notification","overrides":[],"properties":[{"default":null,"kind":null,"name":"background"},{"default":3000,"kind":null,"name":"duration"},{"default":null,"kind":null,"name":"icon"},{"default":"","kind":null,"name":"message"},{"default":null,"kind":null,"name":"notification_type"},{"default":false,"kind":null,"name":"_destroyed"}]},{"extends":null,"module":null,"name":"TemplateActions1","overrides":[],"properties":[{"default":0,"kind":null,"name":"open_modal"},{"default":0,"kind":null,"name":"close_modal"}]},{"extends":null,"module":null,"name":"MaterialTemplateActions1","overrides":[],"properties":[{"default":0,"kind":null,"name":"open_modal"},{"default":0,"kind":null,"name":"close_modal"}]}],"roots":{"references":[{"attributes":{},"id":"1155","type":"UnionRenderers"},{"attributes":{},"id":"1128","type":"BasicTickFormatter"},{"attributes":{},"id":"1130","type":"BasicTickFormatter"},{"attributes":{},"id":"1156","type":"Selection"},{"attributes":{"data":{"x":[0,1,2,3,4,5,6,7,8,9],"y":{"__ndarray__":"xskCoS9QyT//jA0gMFDzv5D74X8DRwbAg1ML5M3u/79+QehziL7kv0yOD8Y13vW/6MfRqr0x4b8W9Ots2ifov8DGSUNAWM0/tFRsYZs38D8=","dtype":"float64","order":"little","shape":[10]}},"selected":{"id":"1178"},"selection_policy":{"id":"1177"}},"id":"1049","type":"ColumnDataSource"},{"attributes":{},"id":"1124","type":"BasicTickFormatter"},{"attributes":{},"id":"1154","type":"Selection"},{"attributes":{"height":0,"margin":[0,0,0,0],"name":"js_area","sizing_mode":"fixed","width":0},"id":"1005","type":"panel.models.markup.HTML"},{"attributes":{"name":"FlexBox00132"},"id":"1013","type":"FlexBox1"},{"attributes":{},"id":"1187","type":"UnionRenderers"},{"attributes":{"format":"0.00%"},"id":"1123","type":"NumeralTickFormatter"},{"attributes":{},"id":"1153","type":"UnionRenderers"},{"attributes":{},"id":"1157","type":"UnionRenderers"},{"attributes":{},"id":"1188","type":"Selection"},{"attributes":{"format":"0.00%"},"id":"1125","type":"NumeralTickFormatter"},{"attributes":{},"id":"1158","type":"Selection"},{"attributes":{},"id":"1104","type":"BasicTickFormatter"},{"attributes":{"format":"0.00%"},"id":"1127","type":"NumeralTickFormatter"},{"attributes":{"children":[{"id":"1011"},{"id":"1012"}],"margin":[0,0,0,0],"name":"140654371332832","sizing_mode":"stretch_width","tags":["main"]},"id":"1010","type":"Row"},{"attributes":{},"id":"1189","type":"UnionRenderers"},{"attributes":{"css_classes":["markdown"],"margin":[5,5,5,5],"name":"140654371334368","sizing_mode":"stretch_width","tags":["main"],"text":"&amp;lt;p&amp;gt;This example demonstrates the &amp;lt;strong&amp;gt;powerful streaming capabilities&amp;lt;/strong&amp;gt; of Panel and the &amp;lt;code&amp;gt;Trend&amp;lt;/code&amp;gt; indicator.&amp;lt;/p&amp;gt;"},"id":"1009","type":"panel.models.markup.HTML"},{"attributes":{},"id":"1159","type":"UnionRenderers"},{"attributes":{},"id":"1190","type":"Selection"},{"attributes":{},"id":"1152","type":"Selection"},{"attributes":{"format":"0.00%"},"id":"1119","type":"NumeralTickFormatter"},{"attributes":{},"id":"1160","type":"Selection"},{"attributes":{},"id":"1151","type":"UnionRenderers"},{"attributes":{},"id":"1126","type":"BasicTickFormatter"},{"attributes":{},"id":"1122","type":"BasicTickFormatter"},{"attributes":{},"id":"1191","type":"UnionRenderers"},{"attributes":{"margin":[5,10,5,10],"mode":"int","placeholder":"0","sizing_mode":"stretch_width","title":"Period","value":500,"value_throttled":500},"id":"1011","type":"Spinner"},{"attributes":{},"id":"1120","type":"BasicTickFormatter"},{"attributes":{"format":"0.00%"},"id":"1121","type":"NumeralTickFormatter"},{"attributes":{},"id":"1161","type":"UnionRenderers"},{"attributes":{},"id":"1192","type":"Selection"},{"attributes":{},"id":"1150","type":"Selection"},{"attributes":{},"id":"1106","type":"BasicTickFormatter"},{"attributes":{"format":"0.00%"},"id":"1105","type":"NumeralTickFormatter"},{"attributes":{},"id":"1162","type":"Selection"},{"attributes":{},"id":"1149","type":"UnionRenderers"},{"attributes":{"format":"0.00%"},"id":"1103","type":"NumeralTickFormatter"},{"attributes":{},"id":"1193","type":"UnionRenderers"},{"attributes":{"active":[0],"align":"end","labels":["Running"],"margin":[5,10,5,10],"sizing_mode":"stretch_width"},"id":"1012","type":"CheckboxGroup"},{"attributes":{"format":"0.00%"},"id":"1131","type":"NumeralTickFormatter"},{"attributes":{},"id":"1163","type":"UnionRenderers"},{"attributes":{},"id":"1194","type":"Selection"},{"attributes":{},"id":"1148","type":"Selection"},{"attributes":{"format":"0.00%"},"id":"1117","type":"NumeralTickFormatter"},{"attributes":{},"id":"1164","type":"Selection"},{"attributes":{},"id":"1147","type":"UnionRenderers"},{"attributes":{"attrs":{"flexbox":[["style",["flex_wrap","justify_content","flex_direction","align_content","align_items"],"display: flex; flex-wrap: {flex_wrap}; justify-content: {justify_content}; flex-direction: {flex_direction}; align-content: {align_content}; align-items: {align_items}; height: 100%;"]]},"children":{"flex-item":[{"id":"1016"},{"id":"1018"},{"id":"1020"},{"id":"1022"},{"id":"1024"},{"id":"1026"},{"id":"1028"},{"id":"1030"},{"id":"1032"},{"id":"1034"},{"id":"1036"},{"id":"1038"},{"id":"1040"},{"id":"1042"},{"id":"1044"},{"id":"1046"},{"id":"1048"},{"id":"1050"},{"id":"1052"},{"id":"1054"},{"id":"1056"},{"id":"1058"},{"id":"1060"},{"id":"1062"},{"id":"1064"},{"id":"1066"},{"id":"1068"},{"id":"1070"},{"id":"1072"},{"id":"1074"},{"id":"1076"},{"id":"1078"}]},"data":{"id":"1013"},"html":"&amp;lt;div id=&amp;quot;flexbox-${id}&amp;quot; style=&amp;quot;display: flex; flex-wrap: ${flex_wrap}; justify-content: ${justify_content}; flex-direction: ${flex_direction}; align-content: ${align_content}; align-items: ${align_items}; height: 100%;&amp;quot;&amp;gt;\n\n  &amp;lt;div id=&amp;quot;flex-item-0-${id}&amp;quot;&amp;gt;\n\n  &amp;lt;/div&amp;gt;\n\n  &amp;lt;div id=&amp;quot;flex-item-1-${id}&amp;quot;&amp;gt;\n\n  &amp;lt;/div&amp;gt;\n\n  &amp;lt;div id=&amp;quot;flex-item-2-${id}&amp;quot;&amp;gt;\n\n  &amp;lt;/div&amp;gt;\n\n  &amp;lt;div id=&amp;quot;flex-item-3-${id}&amp;quot;&amp;gt;\n\n  &amp;lt;/div&amp;gt;\n\n  &amp;lt;div id=&amp;quot;flex-item-4-${id}&amp;quot;&amp;gt;\n\n  &amp;lt;/div&amp;gt;\n\n  &amp;lt;div id=&amp;quot;flex-item-5-${id}&amp;quot;&amp;gt;\n\n  &amp;lt;/div&amp;gt;\n\n  &amp;lt;div id=&amp;quot;flex-item-6-${id}&amp;quot;&amp;gt;\n\n  &amp;lt;/div&amp;gt;\n\n  &amp;lt;div id=&amp;quot;flex-item-7-${id}&amp;quot;&amp;gt;\n\n  &amp;lt;/div&amp;gt;\n\n  &amp;lt;div id=&amp;quot;flex-item-8-${id}&amp;quot;&amp;gt;\n\n  &amp;lt;/div&amp;gt;\n\n  &amp;lt;div id=&amp;quot;flex-item-9-${id}&amp;quot;&amp;gt;\n\n  &amp;lt;/div&amp;gt;\n\n  &amp;lt;div id=&amp;quot;flex-item-10-${id}&amp;quot;&amp;gt;\n\n  &amp;lt;/div&amp;gt;\n\n  &amp;lt;div id=&amp;quot;flex-item-11-${id}&amp;quot;&amp;gt;\n\n  &amp;lt;/div&amp;gt;\n\n  &amp;lt;div id=&amp;quot;flex-item-12-${id}&amp;quot;&amp;gt;\n\n  &amp;lt;/div&amp;gt;\n\n  &amp;lt;div id=&amp;quot;flex-item-13-${id}&amp;quot;&amp;gt;\n\n  &amp;lt;/div&amp;gt;\n\n  &amp;lt;div id=&amp;quot;flex-item-14-${id}&amp;quot;&amp;gt;\n\n  &amp;lt;/div&amp;gt;\n\n  &amp;lt;div id=&amp;quot;flex-item-15-${id}&amp;quot;&amp;gt;\n\n  &amp;lt;/div&amp;gt;\n\n  &amp;lt;div id=&amp;quot;flex-item-16-${id}&amp;quot;&amp;gt;\n\n  &amp;lt;/div&amp;gt;\n\n  &amp;lt;div id=&amp;quot;flex-item-17-${id}&amp;quot;&amp;gt;\n\n  &amp;lt;/div&amp;gt;\n\n  &amp;lt;div id=&amp;quot;flex-item-18-${id}&amp;quot;&amp;gt;\n\n  &amp;lt;/div&amp;gt;\n\n  &amp;lt;div id=&amp;quot;flex-item-19-${id}&amp;quot;&amp;gt;\n\n  &amp;lt;/div&amp;gt;\n\n  &amp;lt;div id=&amp;quot;flex-item-20-${id}&amp;quot;&amp;gt;\n\n  &amp;lt;/div&amp;gt;\n\n  &amp;lt;div id=&amp;quot;flex-item-21-${id}&amp;quot;&amp;gt;\n\n  &amp;lt;/div&amp;gt;\n\n  &amp;lt;div id=&amp;quot;flex-item-22-${id}&amp;quot;&amp;gt;\n\n  &amp;lt;/div&amp;gt;\n\n  &amp;lt;div id=&amp;quot;flex-item-23-${id}&amp;quot;&amp;gt;\n\n  &amp;lt;/div&amp;gt;\n\n  &amp;lt;div id=&amp;quot;flex-item-24-${id}&amp;quot;&amp;gt;\n\n  &amp;lt;/div&amp;gt;\n\n  &amp;lt;div id=&amp;quot;flex-item-25-${id}&amp;quot;&amp;gt;\n\n  &amp;lt;/div&amp;gt;\n\n  &amp;lt;div id=&amp;quot;flex-item-26-${id}&amp;quot;&amp;gt;\n\n  &amp;lt;/div&amp;gt;\n\n  &amp;lt;div id=&amp;quot;flex-item-27-${id}&amp;quot;&amp;gt;\n\n  &amp;lt;/div&amp;gt;\n\n  &amp;lt;div id=&amp;quot;flex-item-28-${id}&amp;quot;&amp;gt;\n\n  &amp;lt;/div&amp;gt;\n\n  &amp;lt;div id=&amp;quot;flex-item-29-${id}&amp;quot;&amp;gt;\n\n  &amp;lt;/div&amp;gt;\n\n  &amp;lt;div id=&amp;quot;flex-item-30-${id}&amp;quot;&amp;gt;\n\n  &amp;lt;/div&amp;gt;\n\n  &amp;lt;div id=&amp;quot;flex-item-31-${id}&amp;quot;&amp;gt;\n\n  &amp;lt;/div&amp;gt;\n\n&amp;lt;/div&amp;gt;","looped":["flex-item"],"margin":[5,5,5,5],"name":"140654372820448","nodes":["flexbox","flex-item-0","flex-item-1","flex-item-2","flex-item-3","flex-item-4","flex-item-5","flex-item-6","flex-item-7","flex-item-8","flex-item-9","flex-item-10","flex-item-11","flex-item-12","flex-item-13","flex-item-14","flex-item-15","flex-item-16","flex-item-17","flex-item-18","flex-item-19","flex-item-20","flex-item-21","flex-item-22","flex-item-23","flex-item-24","flex-item-25","flex-item-26","flex-item-27","flex-item-28","flex-item-29","flex-item-30","flex-item-31"],"scripts":{"after_layout":["if (view.parent != null &amp;amp;&amp;amp; view._has_finished &amp;amp;&amp;amp; !state.resizing) {\n  state.resizing = true\n  view.parent.invalidate_layout()\n  state.resizing = false\n}"]},"sizing_mode":"stretch_width","subscribed_events":["dom_event"],"tags":["main"]},"id":"1014","type":"panel.models.reactive_html.ReactiveHTML"},{"attributes":{},"id":"1195","type":"UnionRenderers"},{"attributes":{},"id":"1118","type":"BasicTickFormatter"},{"attributes":{},"id":"1136","type":"BasicTickFormatter"},{"attributes":{},"id":"1165","type":"UnionRenderers"},{"attributes":{},"id":"1196","type":"Selection"},{"attributes":{"format":"0.00%"},"id":"1115","type":"NumeralTickFormatter"},{"attributes":{},"id":"1146","type":"Selection"},{"attributes":{"name":"location","reload":false},"id":"1003","type":"panel.models.location.Location"},{"attributes":{"format":"0.00%"},"id":"1137","type":"NumeralTickFormatter"},{"attributes":{},"id":"1166","type":"Selection"},{"attributes":{},"id":"1145","type":"UnionRenderers"},{"attributes":{},"id":"1114","type":"BasicTickFormatter"},{"attributes":{"format":"0.00%"},"id":"1133","type":"NumeralTickFormatter"},{"attributes":{"format":"0.00%"},"id":"1113","type":"NumeralTickFormatter"},{"attributes":{},"id":"1138","type":"BasicTickFormatter"},{"attributes":{},"id":"1140","type":"BasicTickFormatter"},{"attributes":{"format":"0.00%"},"id":"1139","type":"NumeralTickFormatter"},{"attributes":{},"id":"1197","type":"UnionRenderers"},{"attributes":{},"id":"1116","type":"BasicTickFormatter"},{"attributes":{},"id":"1142","type":"BasicTickFormatter"},{"attributes":{},"id":"1167","type":"UnionRenderers"},{"attributes":{},"id":"1198","type":"Selection"},{"attributes":{},"id":"1132","type":"BasicTickFormatter"},{"attributes":{},"id":"1134","type":"BasicTickFormatter"},{"attributes":{"format":"0.00%"},"id":"1141","type":"NumeralTickFormatter"},{"attributes":{},"id":"1168","type":"Selection"},{"attributes":{"format":"0.00%"},"id":"1135","type":"NumeralTickFormatter"},{"attributes":{},"id":"1112","type":"BasicTickFormatter"},{"attributes":{},"id":"1199","type":"UnionRenderers"},{"attributes":{},"id":"1108","type":"BasicTickFormatter"},{"attributes":{},"id":"1143","type":"UnionRenderers"},{"attributes":{"format":"0.00%"},"id":"1109","type":"NumeralTickFormatter"},{"attributes":{},"id":"1169","type":"UnionRenderers"},{"attributes":{},"id":"1200","type":"Selection"},{"attributes":{"format":"0.00%"},"id":"1111","type":"NumeralTickFormatter"},{"attributes":{},"id":"1144","type":"Selection"},{"attributes":{},"id":"1170","type":"Selection"},{"attributes":{"css_classes":["loader","light"],"height":20,"margin":[5,10,5,10],"name":"busy_indicator","sizing_mode":"fixed","width":20},"id":"1008","type":"panel.models.markup.HTML"},{"attributes":{"name":"TemplateActions00155"},"id":"1006","type":"TemplateActions1"},{"attributes":{},"id":"1110","type":"BasicTickFormatter"},{"attributes":{"format":"0.00%"},"id":"1107","type":"NumeralTickFormatter"},{"attributes":{"format":"0.00%"},"id":"1129","type":"NumeralTickFormatter"},{"attributes":{"change_formatter":{"id":"1131"},"formatter":{"id":"1132"},"height":100,"layout":"column","margin":[5,10,5,10],"name":"","neg_color":"#d9534f","plot_color":"#428bca","plot_type":"area","plot_x":"x","plot_y":"y","pos_color":"#5cb85c","sizing_mode":"fixed","source":{"id":"1067"},"value":1.467891440125418,"value_change":-0.12109133536585148,"width":150},"id":"1068","type":"panel.models.trend.TrendIndicator"},{"attributes":{"data":{"x":[0,1,2,3,4,5,6,7,8,9],"y":{"__ndarray__":"0RsIMceO478pu9PUFwjwv1R78nWjgcG/KEzOA/IU/T9QlqpXyxnePzrEH1cy5uU/sIzDCaeysr8Q9ym4+sTAvyrForOaf9I/ABq66V1rQL8=","dtype":"float64","order":"little","shape":[10]}},"selected":{"id":"1144"},"selection_policy":{"id":"1143"}},"id":"1015","type":"ColumnDataSource"},{"attributes":{},"id":"1201","type":"UnionRenderers"},{"attributes":{"change_formatter":{"id":"1123"},"formatter":{"id":"1124"},"height":100,"layout":"column","margin":[5,10,5,10],"name":"","neg_color":"#d9534f","plot_color":"#428bca","plot_type":"area","plot_x":"x","plot_y":"y","pos_color":"#5cb85c","sizing_mode":"fixed","source":{"id":"1059"},"value":0.8996551234075514,"value_change":-1.7317622466681415,"width":150},"id":"1060","type":"panel.models.trend.TrendIndicator"},{"attributes":{"data":{"x":[0,1,2,3,4,5,6,7,8,9],"y":{"__ndarray__":"RUfe0J+7wb9yf2qPeRT6vxLUTRRHyfC/kJnlb5WsAcD29CE8vxDlv0ZBsq3zEOe/3HaIlOTk7r8s9a07zVgAwFDt77K4Jfq/gemTaLVP+b8=","dtype":"float64","order":"little","shape":[10]}},"selected":{"id":"1198"},"selection_policy":{"id":"1197"}},"id":"1069","type":"ColumnDataSource"},{"attributes":{"data":{"x":[0,1,2,3,4,5,6,7,8,9],"y":{"__ndarray__":"73bwVJ9w7D/BSb0Zge7jv3GXjF9UefG/jgEmEZR47L8SW+AX0k3Vv/yFW93CPvG/pYUV6Pt38L+WN0nVlPnwvxC5CgbM2gLA4xHRlWIxBMA=","dtype":"float64","order":"little","shape":[10]}},"selected":{"id":"1146"},"selection_policy":{"id":"1145"}},"id":"1017","type":"ColumnDataSource"},{"attributes":{"data":{"x":[0,1,2,3,4,5,6,7,8,9],"y":{"__ndarray__":"fJchYRNB8j8+ulSqXbv5P7NYpwLONPc/lR9DWVwbCUCAD8bIqQ8MQF2LNbjuwwxAcpwloitCA0DowEfL40f8P+t+rJnb3fU/8FxzY0s/2D8=","dtype":"float64","order":"little","shape":[10]}},"selected":{"id":"1200"},"selection_policy":{"id":"1199"}},"id":"1071","type":"ColumnDataSource"},{"attributes":{},"id":"1171","type":"UnionRenderers"},{"attributes":{"data":{"id":"1006"},"margin":[0,0,0,0],"name":"actions","scripts":{"close_modal":["document.getElementById(&amp;#x27;pn-Modal&amp;#x27;).style.display = &amp;#x27;none&amp;#x27;"],"open_modal":["document.getElementById(&amp;#x27;pn-Modal&amp;#x27;).style.display = &amp;#x27;block&amp;#x27;"]},"subscribed_events":["dom_event"]},"id":"1007","type":"panel.models.reactive_html.ReactiveHTML"},{"attributes":{"data":{"x":[0,1,2,3,4,5,6,7,8,9],"y":{"__ndarray__":"xcoTr//x8T+tPDNr7XsAQOGUkLwdYv8/8ZaU/3Q89T8gCkXuIYagP4z/R8aBJvw/UG0kTklQB0Ax/47VAv0FQJaHy0S/5xFA2QqKMRHJEUA=","dtype":"float64","order":"little","shape":[10]}},"selected":{"id":"1148"},"selection_policy":{"id":"1147"}},"id":"1019","type":"ColumnDataSource"},{"attributes":{"data":{"x":[0,1,2,3,4,5,6,7,8,9],"y":{"__ndarray__":"1imlxPz4xj+WaoZAPW7WP7CvMP1D//E/AMyCWce0qj9rkMHwtr72PyWTDRBTqeM/dF7NzazbwL8MAEnwbZTjv7SZGd2PcsW/FrIiP7aL+78=","dtype":"float64","order":"little","shape":[10]}},"selected":{"id":"1190"},"selection_policy":{"id":"1189"}},"id":"1061","type":"ColumnDataSource"},{"attributes":{},"id":"1202","type":"Selection"},{"attributes":{"change_formatter":{"id":"1081"},"formatter":{"id":"1082"},"height":100,"layout":"column","margin":[5,10,5,10],"name":"","neg_color":"#d9534f","plot_color":"#428bca","plot_type":"step","plot_x":"x","plot_y":"y","pos_color":"#5cb85c","sizing_mode":"fixed","source":{"id":"1017"},"value":-2.5241138176372586,"value_change":0.07097628793127941,"width":150},"id":"1018","type":"panel.models.trend.TrendIndicator"},{"attributes":{"change_formatter":{"id":"1127"},"formatter":{"id":"1128"},"height":100,"layout":"column","margin":[5,10,5,10],"name":"","neg_color":"#d9534f","plot_color":"#428bca","plot_type":"line","plot_x":"x","plot_y":"y","pos_color":"#5cb85c","sizing_mode":"fixed","source":{"id":"1063"},"value":-1.8495934615725436,"value_change":1.8285733849253494,"width":150},"id":"1064","type":"panel.models.trend.TrendIndicator"},{"attributes":{"data":{"x":[0,1,2,3,4,5,6,7,8,9],"y":{"__ndarray__":"VW8dngQqBECmc4J0fgQHQILIVJ945wpAC6GX7+q6CkBiQ9uQlpj6PwI3q2KgXwhAy6Tf/O2UB0BY1CcVUdLvP4TZL+TZuPo/FawWvHt89z8=","dtype":"float64","order":"little","shape":[10]}},"selected":{"id":"1196"},"selection_policy":{"id":"1195"}},"id":"1067","type":"ColumnDataSource"},{"attributes":{"change_formatter":{"id":"1129"},"formatter":{"id":"1130"},"height":100,"layout":"column","margin":[5,10,5,10],"name":"","neg_color":"#d9534f","plot_color":"#428bca","plot_type":"step","plot_x":"x","plot_y":"y","pos_color":"#5cb85c","sizing_mode":"fixed","source":{"id":"1065"},"value":3.0262640456913923,"value_change":-0.15269102341762975,"width":150},"id":"1066","type":"panel.models.trend.TrendIndicator"},{"attributes":{"format":"0.00%"},"id":"1101","type":"NumeralTickFormatter"},{"attributes":{},"id":"1172","type":"Selection"},{"attributes":{"change_formatter":{"id":"1133"},"formatter":{"id":"1134"},"height":100,"layout":"column","margin":[5,10,5,10],"name":"","neg_color":"#d9534f","plot_color":"#428bca","plot_type":"bar","plot_x":"x","plot_y":"y","pos_color":"#5cb85c","sizing_mode":"fixed","source":{"id":"1069"},"value":-1.5819601140088653,"value_change":-0.03197217781060524,"width":150},"id":"1070","type":"panel.models.trend.TrendIndicator"},{"attributes":{"data":{"x":[0,1,2,3,4,5,6,7,8,9],"y":{"__ndarray__":"jcGTqazt479mrEanRVoAwATuVWG2vO2/TYeg89Om/L/EHIm6EzUFwBhnLZn5cv+/ymoKQdDn+L80WiK0SMT7vxC7Pse37OS/lZdFUO+X/b8=","dtype":"float64","order":"little","shape":[10]}},"selected":{"id":"1192"},"selection_policy":{"id":"1191"}},"id":"1063","type":"ColumnDataSource"},{"attributes":{"data":{"x":[0,1,2,3,4,5,6,7,8,9],"y":{"__ndarray__":"xJro4Ow11j8mXNZPwUbQv4w++DoHRuW/0FA5lwNSs7+1LbSTRKPEP+vF/BgrfPQ/BRA/Dqaf/j8BMANYL6AQQDubsn2skgxAAnGK7Mk1CEA=","dtype":"float64","order":"little","shape":[10]}},"selected":{"id":"1194"},"selection_policy":{"id":"1193"}},"id":"1065","type":"ColumnDataSource"},{"attributes":{"data":{"x":[0,1,2,3,4,5,6,7,8,9],"y":{"__ndarray__":"KKvxqwxpsb9cAQlm+uP6v/jRPdFONALApn1se1Of5b9/OPyC/JbwvwCSbRIoyb0/PGtsK8oM6r9+FrV7ucsAwFqHH6lbKw7ACyQSsxyfA8A=","dtype":"float64","order":"little","shape":[10]}},"selected":{"id":"1202"},"selection_policy":{"id":"1201"}},"id":"1073","type":"ColumnDataSource"},{"attributes":{"change_formatter":{"id":"1079"},"formatter":{"id":"1080"},"height":100,"layout":"column","margin":[5,10,5,10],"name":"","neg_color":"#d9534f","plot_color":"#428bca","plot_type":"line","plot_x":"x","plot_y":"y","pos_color":"#5cb85c","sizing_mode":"fixed","source":{"id":"1015"},"value":-0.0005010803756285154,"value_change":-1.0017336120900528,"width":150},"id":"1016","type":"panel.models.trend.TrendIndicator"},{"attributes":{"change_formatter":{"id":"1115"},"formatter":{"id":"1116"},"height":100,"layout":"column","margin":[5,10,5,10],"name":"","neg_color":"#d9534f","plot_color":"#428bca","plot_type":"area","plot_x":"x","plot_y":"y","pos_color":"#5cb85c","sizing_mode":"fixed","source":{"id":"1051"},"value":-1.3847397915394692,"value_change":-0.3221570615845075,"width":150},"id":"1052","type":"panel.models.trend.TrendIndicator"},{"attributes":{"format":"0.00%"},"id":"1095","type":"NumeralTickFormatter"},{"attributes":{},"id":"1203","type":"UnionRenderers"},{"attributes":{"change_formatter":{"id":"1121"},"formatter":{"id":"1122"},"height":100,"layout":"column","margin":[5,10,5,10],"name":"","neg_color":"#d9534f","plot_color":"#428bca","plot_type":"step","plot_x":"x","plot_y":"y","pos_color":"#5cb85c","sizing_mode":"fixed","source":{"id":"1057"},"value":-3.477031960758114,"value_change":0.49091302191488095,"width":150},"id":"1058","type":"panel.models.trend.TrendIndicator"},{"attributes":{"change_formatter":{"id":"1125"},"formatter":{"id":"1126"},"height":100,"layout":"column","margin":[5,10,5,10],"name":"","neg_color":"#d9534f","plot_color":"#428bca","plot_type":"bar","plot_x":"x","plot_y":"y","pos_color":"#5cb85c","sizing_mode":"fixed","source":{"id":"1061"},"value":-1.7216093507987629,"value_change":9.274666881318595,"width":150},"id":"1062","type":"panel.models.trend.TrendIndicator"},{"attributes":{},"id":"1173","type":"UnionRenderers"},{"attributes":{},"id":"1204","type":"Selection"},{"attributes":{"change_formatter":{"id":"1119"},"formatter":{"id":"1120"},"height":100,"layout":"column","margin":[5,10,5,10],"name":"","neg_color":"#d9534f","plot_color":"#428bca","plot_type":"line","plot_x":"x","plot_y":"y","pos_color":"#5cb85c","sizing_mode":"fixed","source":{"id":"1055"},"value":3.9139555265160535,"value_change":0.10745701073717862,"width":150},"id":"1056","type":"panel.models.trend.TrendIndicator"},{"attributes":{"data":{"x":[0,1,2,3,4,5,6,7,8,9],"y":{"__ndarray__":"LLGkuFCz/D/8hPom27blPxlnhsgcngFA5rnNH9Fx9D8yUw4Ud5niPwjGuFGYw+2/AO1NFBv3kD8w1dfRwGbsv25ww3nFq/O/XNuWivnJ7D8=","dtype":"float64","order":"little","shape":[10]}},"selected":{"id":"1188"},"selection_policy":{"id":"1187"}},"id":"1059","type":"ColumnDataSource"},{"attributes":{"change_formatter":{"id":"1135"},"formatter":{"id":"1136"},"height":100,"layout":"column","margin":[5,10,5,10],"name":"","neg_color":"#d9534f","plot_color":"#428bca","plot_type":"line","plot_x":"x","plot_y":"y","pos_color":"#5cb85c","sizing_mode":"fixed","source":{"id":"1071"},"value":0.3788631888578058,"value_change":-0.7227825941230355,"width":150},"id":"1072","type":"panel.models.trend.TrendIndicator"},{"attributes":{},"id":"1174","type":"Selection"},{"attributes":{},"id":"1096","type":"BasicTickFormatter"},{"attributes":{},"id":"1102","type":"BasicTickFormatter"},{"attributes":{"data":{"x":[0,1,2,3,4,5,6,7,8,9],"y":{"__ndarray__":"yatrw6zD3r9I+hx3JnPQv4c0i+4gsuA/Ys9fHAgl2z8qgVnyb1TrP4id0ep5gdU/LB8RlZHx5T/QhTcfODLZv5YicPY9qALAptL0IfbQC8A=","dtype":"float64","order":"little","shape":[10]}},"selected":{"id":"1186"},"selection_policy":{"id":"1185"}},"id":"1057","type":"ColumnDataSource"},{"attributes":{"change_formatter":{"id":"1137"},"formatter":{"id":"1138"},"height":100,"layout":"column","margin":[5,10,5,10],"name":"","neg_color":"#d9534f","plot_color":"#428bca","plot_type":"step","plot_x":"x","plot_y":"y","pos_color":"#5cb85c","sizing_mode":"fixed","source":{"id":"1073"},"value":-2.452691458693612,"value_change":-0.34962071222144586,"width":150},"id":"1074","type":"panel.models.trend.TrendIndicator"},{"attributes":{"data":{"x":[0,1,2,3,4,5,6,7,8,9],"y":{"__ndarray__":"uDLdgTxT4j/iuGZtj3/4P41hKgr59Pw/I3/MWyDL+T+MNG6zhCjrPyiidzYt68u/UrVDbQdyAcCqFX9NYez/v+wrkI8ERui/XnVuX/wI+78=","dtype":"float64","order":"little","shape":[10]}},"selected":{"id":"1152"},"selection_policy":{"id":"1151"}},"id":"1023","type":"ColumnDataSource"},{"attributes":{"format":"0.00%"},"id":"1099","type":"NumeralTickFormatter"},{"attributes":{},"id":"1205","type":"UnionRenderers"},{"attributes":{},"id":"1175","type":"UnionRenderers"},{"attributes":{},"id":"1206","type":"Selection"},{"attributes":{"change_formatter":{"id":"1117"},"formatter":{"id":"1118"},"height":100,"layout":"column","margin":[5,10,5,10],"name":"","neg_color":"#d9534f","plot_color":"#428bca","plot_type":"bar","plot_x":"x","plot_y":"y","pos_color":"#5cb85c","sizing_mode":"fixed","source":{"id":"1053"},"value":-0.9382134024338071,"value_change":0.9885719078503195,"width":150},"id":"1054","type":"panel.models.trend.TrendIndicator"},{"attributes":{"data":{"x":[0,1,2,3,4,5,6,7,8,9],"y":{"__ndarray__":"hudnAecq4b+eZLkvNF7SP7ymXAUiNvE/doBFZd4P0T8r5B8WaurdP4TV5yKCp7e/8NFNlIkYzT/gOzzqlLjov/wugYD6/uO/dwE+L8oH778=","dtype":"float64","order":"little","shape":[10]}},"selected":{"id":"1150"},"selection_policy":{"id":"1149"}},"id":"1021","type":"ColumnDataSource"},{"attributes":{"data":{"x":[0,1,2,3,4,5,6,7,8,9],"y":{"__ndarray__":"0pQhHgpk4r/8peSF4Qjdv+EItxm1EeK/clT2Lz6u0z/yNmxdvJXNP/8LyNwjmNu/514OaWro878MdlEiffbjv2ZMi4sDMt6/JugDHdgF7r8=","dtype":"float64","order":"little","shape":[10]}},"selected":{"id":"1182"},"selection_policy":{"id":"1181"}},"id":"1053","type":"ColumnDataSource"},{"attributes":{},"id":"1176","type":"Selection"},{"attributes":{},"id":"1100","type":"BasicTickFormatter"},{"attributes":{"data":{"x":[0,1,2,3,4,5,6,7,8,9],"y":{"__ndarray__":"FhQKjNOA5z/IxWwdH60BQJXQ765QEQdAmtieUWkOCkCfL2D4gyIJQPX2Fwc0OwZAsJRLZCAZDEAy0l7AJqsPQIkvp6IBRgxATBRD6sdPD0A=","dtype":"float64","order":"little","shape":[10]}},"selected":{"id":"1184"},"selection_policy":{"id":"1183"}},"id":"1055","type":"ColumnDataSource"},{"attributes":{"change_formatter":{"id":"1111"},"formatter":{"id":"1112"},"height":100,"layout":"column","margin":[5,10,5,10],"name":"","neg_color":"#d9534f","plot_color":"#428bca","plot_type":"line","plot_x":"x","plot_y":"y","pos_color":"#5cb85c","sizing_mode":"fixed","source":{"id":"1047"},"value":-5.0077211522315945,"value_change":0.34309253522523275,"width":150},"id":"1048","type":"panel.models.trend.TrendIndicator"},{"attributes":{"format":"0.00%"},"id":"1097","type":"NumeralTickFormatter"},{"attributes":{"data":{"x":[0,1,2,3,4,5,6,7,8,9],"y":{"__ndarray__":"HlR5K6zk6b9quHVJfmYFwLoYLkL2nBHAEVW1YnzBGMAMg5nHoocYwHm8rk0hnBTAwqKD+OapEcCgQ4cOSVgRwDPpRA740w3A3knBDegHFMA=","dtype":"float64","order":"little","shape":[10]}},"selected":{"id":"1176"},"selection_policy":{"id":"1175"}},"id":"1047","type":"ColumnDataSource"},{"attributes":{},"id":"1098","type":"BasicTickFormatter"},{"attributes":{"data":{"x":[0,1,2,3,4,5,6,7,8,9],"y":{"__ndarray__":"gY/8cc7zwT9Xp41z47nqP6AyShuPx7K/qFvZigiaqL8wvX1QDkG2vxoSc+dK4/K/GWQ+5PCwC8Cj+ZnRVEwKwFZe+THIVwDALBxi6eQn9r8=","dtype":"float64","order":"little","shape":[10]}},"selected":{"id":"1180"},"selection_policy":{"id":"1179"}},"id":"1051","type":"ColumnDataSource"},{"attributes":{"change_formatter":{"id":"1113"},"formatter":{"id":"1114"},"height":100,"layout":"column","margin":[5,10,5,10],"name":"","neg_color":"#d9534f","plot_color":"#428bca","plot_type":"step","plot_x":"x","plot_y":"y","pos_color":"#5cb85c","sizing_mode":"fixed","source":{"id":"1049"},"value":1.0135759168236236,"value_change":3.4211589208442517,"width":150},"id":"1050","type":"panel.models.trend.TrendIndicator"},{"attributes":{"data":{"x":[0,1,2,3,4,5,6,7,8,9],"y":{"__ndarray__":"ArY2jali5r8kGiToHj3FP4RCiFD0HOg/59lZaaNc/D/LdD81zUvzP4/pL71MUu0/WQ6hpg/r7T+Uq6wP5gzAvyilZq6CX/M/In5P1S+e9z8=","dtype":"float64","order":"little","shape":[10]}},"selected":{"id":"1172"},"selection_policy":{"id":"1171"}},"id":"1043","type":"ColumnDataSource"},{"attributes":{},"id":"1177","type":"UnionRenderers"},{"attributes":{"data":{"x":[0,1,2,3,4,5,6,7,8,9],"y":{"__ndarray__":"Y8YhvkGD4b8Yz2024HTVPx5jYQv6lAFADWLic7/p/T8ti5voOFUBQIlB8elLAAlAKLA+zOuvEUBAw8201GwLQJDtLqD8ogtArpQUZLFTFkA=","dtype":"float64","order":"little","shape":[10]}},"selected":{"id":"1174"},"selection_policy":{"id":"1173"}},"id":"1045","type":"ColumnDataSource"},{"attributes":{},"id":"1178","type":"Selection"},{"attributes":{"data":{"x":[0,1,2,3,4,5,6,7,8,9],"y":{"__ndarray__":"giAOOwMswr+5iBm/MjMDwBw42bVhQg3AJAEy1lcmC8Ba8vj7mUgSwPKHEOxGixPAG1No3mOoEsAgljzDeBMLwMH4dM2ooQnAX9boDB7lBsA=","dtype":"float64","order":"little","shape":[10]}},"selected":{"id":"1164"},"selection_policy":{"id":"1163"}},"id":"1035","type":"ColumnDataSource"},{"attributes":{},"id":"1094","type":"BasicTickFormatter"},{"attributes":{"change_formatter":{"id":"1109"},"formatter":{"id":"1110"},"height":100,"layout":"column","margin":[5,10,5,10],"name":"","neg_color":"#d9534f","plot_color":"#428bca","plot_type":"bar","plot_x":"x","plot_y":"y","pos_color":"#5cb85c","sizing_mode":"fixed","source":{"id":"1045"},"value":5.581731380230094,"value_change":0.6157465955531456,"width":150},"id":"1046","type":"panel.models.trend.TrendIndicator"},{"attributes":{"format":"0.00%"},"id":"1093","type":"NumeralTickFormatter"},{"attributes":{"change_formatter":{"id":"1105"},"formatter":{"id":"1106"},"height":100,"layout":"column","margin":[5,10,5,10],"name":"","neg_color":"#d9534f","plot_color":"#428bca","plot_type":"step","plot_x":"x","plot_y":"y","pos_color":"#5cb85c","sizing_mode":"fixed","source":{"id":"1041"},"value":-2.9812068282228137,"value_change":1.215920664942436,"width":150},"id":"1042","type":"panel.models.trend.TrendIndicator"},{"attributes":{"format":"0.00%"},"id":"1091","type":"NumeralTickFormatter"},{"attributes":{"data":{"x":[0,1,2,3,4,5,6,7,8,9],"y":{"__ndarray__":"zTgddqa1wz8OUwpiKXsBQDwkTHMOJO0/RYbshYdR5T/+rmWi+231v+DOqNrp4rk/xLweV/Y69T+33Fv7Vfr5P1yTjpkpnABAWmc/QwS88j8=","dtype":"float64","order":"little","shape":[10]}},"selected":{"id":"1166"},"selection_policy":{"id":"1165"}},"id":"1037","type":"ColumnDataSource"},{"attributes":{},"id":"1179","type":"UnionRenderers"},{"attributes":{"data":{"x":[0,1,2,3,4,5,6,7,8,9],"y":{"__ndarray__":"LIwVHD9TAMCJy6kKT1sIwBK5/vAq4gTAr/35OrreAcBr8CoBRGr9v6he0ED2fgnAWmtGGntb87/uWTW0j9/mvyntlziWhvW/iaEu94LZB8A=","dtype":"float64","order":"little","shape":[10]}},"selected":{"id":"1170"},"selection_policy":{"id":"1169"}},"id":"1041","type":"ColumnDataSource"},{"attributes":{"change_formatter":{"id":"1107"},"formatter":{"id":"1108"},"height":100,"layout":"column","margin":[5,10,5,10],"name":"","neg_color":"#d9534f","plot_color":"#428bca","plot_type":"area","plot_x":"x","plot_y":"y","pos_color":"#5cb85c","sizing_mode":"fixed","source":{"id":"1043"},"value":1.4761198360864758,"value_change":0.21910960380805378,"width":150},"id":"1044","type":"panel.models.trend.TrendIndicator"},{"attributes":{},"id":"1092","type":"BasicTickFormatter"},{"attributes":{},"id":"1180","type":"Selection"},{"attributes":{},"id":"1090","type":"BasicTickFormatter"},{"attributes":{"change_formatter":{"id":"1101"},"formatter":{"id":"1102"},"height":100,"layout":"column","margin":[5,10,5,10],"name":"","neg_color":"#d9534f","plot_color":"#428bca","plot_type":"bar","plot_x":"x","plot_y":"y","pos_color":"#5cb85c","sizing_mode":"fixed","source":{"id":"1037"},"value":1.1709025027143611,"value_change":-0.4360496980231622,"width":150},"id":"1038","type":"panel.models.trend.TrendIndicator"},{"attributes":{"format":"0.00%"},"id":"1089","type":"NumeralTickFormatter"},{"attributes":{"change_formatter":{"id":"1103"},"formatter":{"id":"1104"},"height":100,"layout":"column","margin":[5,10,5,10],"name":"","neg_color":"#d9534f","plot_color":"#428bca","plot_type":"line","plot_x":"x","plot_y":"y","pos_color":"#5cb85c","sizing_mode":"fixed","source":{"id":"1039"},"value":0.2968028919604392,"value_change":-0.7510714868666626,"width":150},"id":"1040","type":"panel.models.trend.TrendIndicator"},{"attributes":{"format":"0.00%"},"id":"1087","type":"NumeralTickFormatter"},{"attributes":{"change_formatter":{"id":"1095"},"formatter":{"id":"1096"},"height":100,"layout":"column","margin":[5,10,5,10],"name":"","neg_color":"#d9534f","plot_color":"#428bca","plot_type":"line","plot_x":"x","plot_y":"y","pos_color":"#5cb85c","sizing_mode":"fixed","source":{"id":"1031"},"value":-0.3186164956146169,"value_change":-0.8651495103341287,"width":150},"id":"1032","type":"panel.models.trend.TrendIndicator"},{"attributes":{"change_formatter":{"id":"1097"},"formatter":{"id":"1098"},"height":100,"layout":"column","margin":[5,10,5,10],"name":"","neg_color":"#d9534f","plot_color":"#428bca","plot_type":"step","plot_x":"x","plot_y":"y","pos_color":"#5cb85c","sizing_mode":"fixed","source":{"id":"1033"},"value":5.1523648354034846,"value_change":-0.0799787921348315,"width":150},"id":"1034","type":"panel.models.trend.TrendIndicator"},{"attributes":{"data":{"x":[0,1,2,3,4,5,6,7,8,9],"y":{"__ndarray__":"aHo6TORZyD9CNZP0GefMPwHlJW36VPS/IdfSxi4M4b/oVr+tEPvxv3jzSy6qO+2/lgUdJhIo8z/YEHP7ZK7tP2s5HwXAE/M//gKVjtH+0j8=","dtype":"float64","order":"little","shape":[10]}},"selected":{"id":"1168"},"selection_policy":{"id":"1167"}},"id":"1039","type":"ColumnDataSource"},{"attributes":{},"id":"1181","type":"UnionRenderers"},{"attributes":{},"id":"1088","type":"BasicTickFormatter"},{"attributes":{},"id":"1086","type":"BasicTickFormatter"},{"attributes":{},"id":"1182","type":"Selection"},{"attributes":{"change_formatter":{"id":"1099"},"formatter":{"id":"1100"},"height":100,"layout":"column","margin":[5,10,5,10],"name":"","neg_color":"#d9534f","plot_color":"#428bca","plot_type":"area","plot_x":"x","plot_y":"y","pos_color":"#5cb85c","sizing_mode":"fixed","source":{"id":"1035"},"value":-2.8618737228924114,"value_change":-0.10676293288540051,"width":150},"id":"1036","type":"panel.models.trend.TrendIndicator"},{"attributes":{"format":"0.00%"},"id":"1085","type":"NumeralTickFormatter"},{"attributes":{"format":"0.00%"},"id":"1083","type":"NumeralTickFormatter"},{"attributes":{"data":{"x":[0,1,2,3,4,5,6,7,8,9],"y":{"__ndarray__":"4DOYjbX1AMAEnwgCgZYGwIgctpimcQrANDS5zRiP5r+Wm3dLbWfpP2ClLBOSW6U/ZZtfZlYS97/tZOqa69vlv0C2/+9p2qy/eL7OTcUR+T8=","dtype":"float64","order":"little","shape":[10]}},"selected":{"id":"1156"},"selection_policy":{"id":"1155"}},"id":"1027","type":"ColumnDataSource"},{"attributes":{"data":{"x":[0,1,2,3,4,5,6,7,8,9],"y":{"__ndarray__":"oAERu+Tv9D8MtjK7gFQJQBAdHE1u4xBAaBF21baWBkAXDfLsjyAQQK1vtAslsxBApuDc78X/EUA8xubbaYUXQKOjhIOsZhZAO3kEhwWcFEA=","dtype":"float64","order":"little","shape":[10]}},"selected":{"id":"1162"},"selection_policy":{"id":"1161"}},"id":"1033","type":"ColumnDataSource"},{"attributes":{"data":{"x":[0,1,2,3,4,5,6,7,8,9],"y":{"__ndarray__":"KgHpKlIr3j/smL/9mbGyP9zL84KcadC/LRp1dwqg5L9KILa7XlHeP9uEPvZUPfA/drzDZNMLAUAPnSSTULz+P6VJrURNHgZAl/xPA0ogEUA=","dtype":"float64","order":"little","shape":[10]}},"selected":{"id":"1158"},"selection_policy":{"id":"1157"}},"id":"1029","type":"ColumnDataSource"},{"attributes":{"change_formatter":{"id":"1087"},"formatter":{"id":"1088"},"height":100,"layout":"column","margin":[5,10,5,10],"name":"","neg_color":"#d9534f","plot_color":"#428bca","plot_type":"line","plot_x":"x","plot_y":"y","pos_color":"#5cb85c","sizing_mode":"fixed","source":{"id":"1023"},"value":-1.689693806437695,"value_change":1.2275397453138428,"width":150},"id":"1024","type":"panel.models.trend.TrendIndicator"},{"attributes":{"change_formatter":{"id":"1093"},"formatter":{"id":"1094"},"height":100,"layout":"column","margin":[5,10,5,10],"name":"","neg_color":"#d9534f","plot_color":"#428bca","plot_type":"bar","plot_x":"x","plot_y":"y","pos_color":"#5cb85c","sizing_mode":"fixed","source":{"id":"1029"},"value":4.281532336956977,"value_change":0.5485889821177719,"width":150},"id":"1030","type":"panel.models.trend.TrendIndicator"},{"attributes":{},"id":"1183","type":"UnionRenderers"},{"attributes":{"change_formatter":{"id":"1089"},"formatter":{"id":"1090"},"height":100,"layout":"column","margin":[5,10,5,10],"name":"","neg_color":"#d9534f","plot_color":"#428bca","plot_type":"step","plot_x":"x","plot_y":"y","pos_color":"#5cb85c","sizing_mode":"fixed","source":{"id":"1025"},"value":-0.8428684721191135,"value_change":0.4014781067057296,"width":150},"id":"1026","type":"panel.models.trend.TrendIndicator"},{"attributes":{},"id":"1084","type":"BasicTickFormatter"},{"attributes":{"data":{"x":[0,1,2,3,4,5,6,7,8,9],"y":{"__ndarray__":"/DZJ7PVz3j/rKlyfQCn3vyOHtFjrIwDAsNfGHeXFAsA2HEXc+Jzuv+IDZLuAbeO/8PSInBfb2L8kSnex1U/3v7aJBaXj5gLAyGAocTZk1L8=","dtype":"float64","order":"little","shape":[10]}},"selected":{"id":"1160"},"selection_policy":{"id":"1159"}},"id":"1031","type":"ColumnDataSource"},{"attributes":{"data":{"x":[0,1,2,3,4,5,6,7,8,9],"y":{"__ndarray__":"hcRj5bUX5j9SsoQDlDTbvy6FlAadn8S/3qn7c5ohtb8RhYZgH5T4v/+dXWk/+f6/OC6p8Oap47+SQu/ABmvXv2NwqIr2/uu/aBpPrTyy8D8=","dtype":"float64","order":"little","shape":[10]}},"selected":{"id":"1204"},"selection_policy":{"id":"1203"}},"id":"1075","type":"ColumnDataSource"},{"attributes":{},"id":"1184","type":"Selection"},{"attributes":{"change_formatter":{"id":"1083"},"formatter":{"id":"1084"},"height":100,"layout":"column","margin":[5,10,5,10],"name":"","neg_color":"#d9534f","plot_color":"#428bca","plot_type":"area","plot_x":"x","plot_y":"y","pos_color":"#5cb85c","sizing_mode":"fixed","source":{"id":"1019"},"value":4.446354650545538,"value_change":-0.006693209804119249,"width":150},"id":"1020","type":"panel.models.trend.TrendIndicator"},{"attributes":{"format":"0.00%"},"id":"1081","type":"NumeralTickFormatter"},{"attributes":{},"id":"1082","type":"BasicTickFormatter"},{"attributes":{"change_formatter":{"id":"1091"},"formatter":{"id":"1092"},"height":100,"layout":"column","margin":[5,10,5,10],"name":"","neg_color":"#d9534f","plot_color":"#428bca","plot_type":"area","plot_x":"x","plot_y":"y","pos_color":"#5cb85c","sizing_mode":"fixed","source":{"id":"1027"},"value":1.5668385543212064,"value_change":-28.803568557452124,"width":150},"id":"1028","type":"panel.models.trend.TrendIndicator"},{"attributes":{},"id":"1080","type":"BasicTickFormatter"},{"attributes":{"data":{"x":[0,1,2,3,4,5,6,7,8,9],"y":{"__ndarray__":"jk6A6xIt0D9YK5O8T7byP/hVr6fz6uq/pm89NK+KBcB5uAyxi4T+v5zRGwzIfPu/EC1Qh0ZFsL+acwFah7b/v8AUR3PIPuO/NphSTcf46r8=","dtype":"float64","order":"little","shape":[10]}},"selected":{"id":"1154"},"selection_policy":{"id":"1153"}},"id":"1025","type":"ColumnDataSource"},{"attributes":{"data":{"x":[0,1,2,3,4,5,6,7,8,9],"y":{"__ndarray__":"skt+8N4l8D/OrMTedGb6PzznYnL12+M/4g+HzvM45z8E4BufDI7oP7pVH9jTPfA/a1hLeiu36D9VJi2qukIIQLKaKl7QlfM/7Lzx7lGL6D8=","dtype":"float64","order":"little","shape":[10]}},"selected":{"id":"1206"},"selection_policy":{"id":"1205"}},"id":"1077","type":"ColumnDataSource"},{"attributes":{"format":"0.00%"},"id":"1079","type":"NumeralTickFormatter"},{"attributes":{},"id":"1185","type":"UnionRenderers"},{"attributes":{"change_formatter":{"id":"1085"},"formatter":{"id":"1086"},"height":100,"layout":"column","margin":[5,10,5,10],"name":"","neg_color":"#d9534f","plot_color":"#428bca","plot_type":"bar","plot_x":"x","plot_y":"y","pos_color":"#5cb85c","sizing_mode":"fixed","source":{"id":"1021"},"value":-0.96970090128893,"value_change":0.5518310434713785,"width":150},"id":"1022","type":"panel.models.trend.TrendIndicator"},{"attributes":{"change_formatter":{"id":"1139"},"formatter":{"id":"1140"},"height":100,"layout":"column","margin":[5,10,5,10],"name":"","neg_color":"#d9534f","plot_color":"#428bca","plot_type":"area","plot_x":"x","plot_y":"y","pos_color":"#5cb85c","sizing_mode":"fixed","source":{"id":"1075"},"value":1.0435148973353083,"value_change":-2.1927610028757196,"width":150},"id":"1076","type":"panel.models.trend.TrendIndicator"},{"attributes":{},"id":"1186","type":"Selection"},{"attributes":{"change_formatter":{"id":"1141"},"formatter":{"id":"1142"},"height":100,"layout":"column","margin":[5,10,5,10],"name":"","neg_color":"#d9534f","plot_color":"#428bca","plot_type":"bar","plot_x":"x","plot_y":"y","pos_color":"#5cb85c","sizing_mode":"fixed","source":{"id":"1077"},"value":0.7670068423157352,"value_change":-0.3733991596646128,"width":150},"id":"1078","type":"panel.models.trend.TrendIndicator"}],"root_ids":["1003","1005","1007","1008","1009","1010","1014"]},"title":"Streaming Trend","version":"2.4.3"}}
+    </script>
+    <script type="text/javascript">
+      (function() {
+        const fn = function() {
+          Bokeh.safely(function() {
+            (function(root) {
+              function embed_document(root) {
+              const docs_json = document.getElementById('1591').textContent;
+              const render_items = [{"docid":"74179ff9-9eae-42af-a87e-65f9e6ddae48","root_ids":["1003","1005","1007","1008","1009","1010","1014"],"roots":{"1003":"e74a4d69-fa3f-4f72-83d4-835b8fbd3256","1005":"1d322935-74e0-4454-9480-ab56b6edee8e","1007":"c6adc419-b499-4815-95e7-dad2f5135f39","1008":"40a00742-52f7-4642-9518-0db98de46ea9","1009":"ac739e0d-2936-413b-8d2d-479061dea81f","1010":"bf301f86-32e5-4d54-993b-1386f045cdf2","1014":"3864b5b9-9603-46b3-a59b-ff3ab3f84537"}}];
+              root.Bokeh.embed.embed_items(docs_json, render_items);
+              }
+              if (root.Bokeh !== undefined) {
+                embed_document(root);
+              } else {
+                let attempts = 0;
+                const timer = setInterval(function(root) {
+                  if (root.Bokeh !== undefined) {
+                    clearInterval(timer);
+                    embed_document(root);
+                  } else {
+                    attempts++;
+                    if (attempts > 100) {
+                      clearInterval(timer);
+                      console.log("Bokeh: ERROR: Unable to run BokehJS code because BokehJS library is missing");
+                    }
+                  }
+                }, 10, root)
+              }
+            })(window);
+          });
+        };
+        if (document.readyState != "loading") fn();
+        else document.addEventListener("DOMContentLoaded", fn);
+      })();
+    </script>
+  </body>
+</html>

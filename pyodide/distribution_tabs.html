@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Distribution Tabs</title>
+<link rel="icon" href="https://panel.holoviz.org/_static/icons/favicon.ico" type=""><link rel="manifest" href="site.webmanifest"><meta name="name" content="Distribution Tabs">    <link rel="stylesheet" href="https://cdn.holoviz.org/panel/0.14.4/dist/css/card.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.holoviz.org/panel/0.14.4/dist/css/json.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.holoviz.org/panel/0.14.4/dist/css/dataframe.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.holoviz.org/panel/0.14.4/dist/css/loading.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.holoviz.org/panel/0.14.4/dist/css/widgets.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.holoviz.org/panel/0.14.4/dist/css/debugger.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.holoviz.org/panel/0.14.4/dist/css/alerts.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.holoviz.org/panel/0.14.4/dist/css/markdown.css" type="text/css" />
+    <style>
+        
+    .bk.pn-loading.arc:before {
+      background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHN0eWxlPSJtYXJnaW46IGF1dG87IGJhY2tncm91bmQ6IG5vbmU7IGRpc3BsYXk6IGJsb2NrOyBzaGFwZS1yZW5kZXJpbmc6IGF1dG87IiB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ieE1pZFlNaWQiPiAgPGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYzNjM2MzIiBzdHJva2Utd2lkdGg9IjEwIiByPSIzNSIgc3Ryb2tlLWRhc2hhcnJheT0iMTY0LjkzMzYxNDMxMzQ2NDE1IDU2Ljk3Nzg3MTQzNzgyMTM4Ij4gICAgPGFuaW1hdGVUcmFuc2Zvcm0gYXR0cmlidXRlTmFtZT0idHJhbnNmb3JtIiB0eXBlPSJyb3RhdGUiIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIiBkdXI9IjFzIiB2YWx1ZXM9IjAgNTAgNTA7MzYwIDUwIDUwIiBrZXlUaW1lcz0iMDsxIj48L2FuaW1hdGVUcmFuc2Zvcm0+ICA8L2NpcmNsZT48L3N2Zz4=");
+      background-size: auto calc(min(50%, 400px));
+    }
+    
+    </style>
+
+<script type="text/javascript">
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./serviceWorker.js').then(reg => {
+    reg.onupdatefound = () => {
+      const installingWorker = reg.installing;
+      installingWorker.onstatechange = () => {
+        if (installingWorker.state === 'installed' &&
+            navigator.serviceWorker.controller) {
+          // Reload page if service worker is replaced
+          location.reload();
+        }
+      }
+    }
+  })
+}
+</script>
+
+<script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-2.4.3.min.js"></script><script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-gl-2.4.3.min.js"></script><script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-widgets-2.4.3.min.js"></script><script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-tables-2.4.3.min.js"></script><script type="text/javascript" src="https://cdn.holoviz.org/panel/0.14.4/dist/panel.min.js"></script><script type="text/javascript">
+    Bokeh.set_log_level("info");
+</script><!-- Template CSS -->
+<link rel="stylesheet" href="https://cdn.holoviz.org/panel/0.14.4/dist/bundled/fastbasetemplate/fast_root.css">
+<link rel="stylesheet" href="https://cdn.holoviz.org/panel/0.14.4/dist/bundled/fastbasetemplate/fast_bokeh.css">
+<link rel="stylesheet" href="https://cdn.holoviz.org/panel/0.14.4/dist/bundled/fastbasetemplate/fast_bokeh_slickgrid.css">
+<link rel="stylesheet" href="https://cdn.holoviz.org/panel/0.14.4/dist/bundled/fastbasetemplate/fast_panel.css">
+<link rel="stylesheet" href="https://cdn.holoviz.org/panel/0.14.4/dist/bundled/fastbasetemplate/fast_panel_dataframe.css">
+<link rel="stylesheet" href="https://cdn.holoviz.org/panel/0.14.4/dist/bundled/fastbasetemplate/fast_panel_widgets.css">
+<link rel="stylesheet" href="https://cdn.holoviz.org/panel/0.14.4/dist/bundled/fastbasetemplate/fast_panel_markdown.css">
+<link rel="stylesheet" href="https://cdn.holoviz.org/panel/0.14.4/dist/bundled/fastbasetemplate/fast_awesome.css">
+<link rel="stylesheet" href="https://cdn.holoviz.org/panel/0.14.4/dist/bundled/fastlisttemplate/fast_list_template.css">
+<link rel="stylesheet" href="https://cdn.holoviz.org/panel/0.14.4/dist/bundled/fastdefaulttheme/fast_root_default.css">
+<link rel="stylesheet" href="https://cdn.holoviz.org/panel/0.14.4/dist/bundled/fastlisttemplate/default.css">
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
+
+<style>
+  :root {
+    --body-font: Open Sans, sans-serif;
+  }
+  body {
+    color: #00aa41;
+    background-color: #ffffff;
+    font-family: var(--body-font);
+  }
+  #header a {
+    color: currentColor;
+  }
+  #header-design-provider {
+    --neutral-foreground-rest: #ffffff;
+  }
+  #sidebar {
+    width: 330px;
+  }
+  #header {
+      box-shadow: 2px 2px 10px silver;
+  }
+  #sidebar {
+      box-shadow: 2px 2px 10px silver;
+  }
+</style>
+
+<!-- Template JS -->
+<script src="https://cdn.holoviz.org/panel/0.14.4/dist/bundled/fastbasetemplate/fast_template.js"></script>
+<script src="https://cdn.holoviz.org/panel/0.14.4/dist/bundled/js/@microsoft/fast-colors@5.3.1/dist/index.js" type="module"></script>
+<script src="https://cdn.holoviz.org/panel/0.14.4/dist/bundled/js/@microsoft/fast-components@1.21.8/dist/fast-components.js" type="module"></script>
+
+<!-- Fast Script -->
+<script type="module">
+  import { parseColorHexRGB } from "https://cdn.holoviz.org/panel/0.14.4/dist/bundled/js/@microsoft/fast-colors@5.3.1/dist/index.js";
+  import {
+    createColorPalette,
+    accentFillActiveBehavior,
+    accentFillHoverBehavior,
+    accentFillRestBehavior,
+    accentForegroundActiveBehavior,
+    accentForegroundCutRestBehavior,
+    accentForegroundFocusBehavior,
+    accentForegroundHoverBehavior,
+    accentForegroundRestBehavior,
+    neutralDividerRestBehavior,
+    neutralFillHoverBehavior,
+    neutralFillInputActiveBehavior,
+    neutralFillInputHoverBehavior,
+    neutralFillInputRestBehavior,
+    neutralFillRestBehavior,
+    neutralFillStealthActiveBehavior,
+    neutralFillStealthHoverBehavior,
+    neutralFillStealthRestBehavior,
+    neutralFocusBehavior,
+    neutralFocusInnerAccentBehavior,
+    neutralForegroundActiveBehavior,
+    neutralForegroundHoverBehavior,
+    neutralLayerFloatingBehavior,
+    neutralOutlineActiveBehavior,
+    neutralOutlineHoverBehavior,
+    neutralOutlineRestBehavior
+  } from "https://cdn.holoviz.org/panel/0.14.4/dist/bundled/js/@microsoft/fast-components@1.21.8/dist/fast-components.js";
+
+  function standardize_color(str){
+    var ctx = document.createElement('canvas').getContext('2d');
+    ctx.fillStyle = str;
+    return ctx.fillStyle;
+  }
+
+  function setAccentColor(color, selector){
+      color = standardize_color(color);
+      const accent = color;
+      const palette = createColorPalette(parseColorHexRGB(accent));
+      const provider = document.querySelector(selector);
+      provider.accentBaseColor = accent;
+      provider.accentPalette = palette;
+  }
+  setAccentColor("#0072B5", "#body-design-provider");
+  setAccentColor("#ffffff", "#header-design-provider");
+
+  function setNeutralColor(color, selector){
+      color = standardize_color(color);
+      const palette = createColorPalette(parseColorHexRGB(color));
+      const provider = document.querySelector(selector);
+
+      provider.neutralPalette = palette;
+  }
+  setNeutralColor("#ffffff", "#header-design-provider");
+  setNeutralColor("#000000", "#body-design-provider");
+
+  function setBackgroundColor(color, selector){
+    color = standardize_color(color);
+    const provider = document.querySelector(selector);
+    provider.backgroundColor=color;
+  }
+  setBackgroundColor("#0072B5", "#header-design-provider");
+  setBackgroundColor("#ffffff", "#body-design-provider");
+
+  document.querySelector("#body-design-provider").cornerRadius=3;
+
+  function registerCSSCustomProperties(selector)  {
+    const provider = document.querySelector(selector);
+    provider.registerCSSCustomProperty(accentFillActiveBehavior)
+    provider.registerCSSCustomProperty(neutralFillRestBehavior)
+    provider.registerCSSCustomProperty(accentFillHoverBehavior)
+    provider.registerCSSCustomProperty(accentFillRestBehavior)
+    provider.registerCSSCustomProperty(accentForegroundActiveBehavior)
+    provider.registerCSSCustomProperty(accentForegroundCutRestBehavior)
+    provider.registerCSSCustomProperty(accentForegroundFocusBehavior)
+    provider.registerCSSCustomProperty(accentForegroundHoverBehavior)
+    provider.registerCSSCustomProperty(accentForegroundRestBehavior)
+    provider.registerCSSCustomProperty(neutralDividerRestBehavior)
+    provider.registerCSSCustomProperty(neutralFillHoverBehavior)
+    provider.registerCSSCustomProperty(neutralFillInputActiveBehavior)
+    provider.registerCSSCustomProperty(neutralFillInputHoverBehavior)
+    provider.registerCSSCustomProperty(neutralFillInputRestBehavior)
+    provider.registerCSSCustomProperty(neutralFillRestBehavior)
+    provider.registerCSSCustomProperty(neutralFillStealthActiveBehavior)
+    provider.registerCSSCustomProperty(neutralFillStealthHoverBehavior)
+    provider.registerCSSCustomProperty(neutralFillStealthRestBehavior)
+    provider.registerCSSCustomProperty(neutralFocusBehavior)
+    provider.registerCSSCustomProperty(neutralFocusInnerAccentBehavior)
+    provider.registerCSSCustomProperty(neutralForegroundActiveBehavior)
+    provider.registerCSSCustomProperty(neutralForegroundHoverBehavior)
+    provider.registerCSSCustomProperty(neutralLayerFloatingBehavior)
+    provider.registerCSSCustomProperty(neutralOutlineActiveBehavior)
+    provider.registerCSSCustomProperty(neutralOutlineHoverBehavior)
+    provider.registerCSSCustomProperty(neutralOutlineRestBehavior)
+  }
+  registerCSSCustomProperties("#header-design-provider")
+  registerCSSCustomProperties("#body-design-provider")
+
+  class FastDesignProvider {
+    setAccentColor(value, element){
+      setAccentColor(value, element);
+    }
+    setNeutralColor(value, element){
+      setNeutralColor(value, element);
+    }
+    setBackgroundColor(value, element){
+      setBackgroundColor(value, element)
+    }
+  }
+  window.fastDesignProvider = new FastDesignProvider()
+</script>
+  </head>
+  <body class="bk pn-loading arc">
+<fast-design-system-provider id="body-design-provider" use-defaults accent-foreground-cut-rest="#FFFFFF"
+background-color="#ffffff"accent-base-color="#0072B5"  >
+  <div id="container">
+  <fast-design-system-provider id="header-design-provider"
+background-color="#0072B5"  >
+  <nav id="header">
+    <div class="app-header">
+<a class="title" href="/" >&nbsp;Panel</a><span class="title">-</span><a class="title" href="" >Distribution Tabs</a>    </div>
+    <div id="header-items">
+  </div>
+  <div class="pn-toggle-theme">
+    <fast-switch id="theme-switch" style="float: right;" onChange="toggleLightDarkTheme('default')" checked>
+      <span slot="checked-message">
+        <svg class="theme-toggle-icon" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25"><path d="M0 0h24v24H0z" fill="none"/><path d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.79 1.42-1.41zM4 10.5H1v2h3v-2zm9-9.95h-2V3.5h2V.55zm7.45 3.91l-1.41-1.41-1.79 1.79 1.41 1.41 1.79-1.79zm-3.21 13.7l1.79 1.8 1.41-1.41-1.8-1.79-1.4 1.4zM20 10.5v2h3v-2h-3zm-8-5c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm-1 16.95h2V19.5h-2v2.95zm-7.45-3.91l1.41 1.41 1.79-1.8-1.41-1.41-1.79 1.8z"/></svg>
+      </span>
+      <span slot="unchecked-message">
+        <svg class="theme-toggle-icon" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25"><path d="M0 0h24v24H0z" fill="none"/><path d="M10 2c-1.82 0-3.53.5-5 1.35C7.99 5.08 10 8.3 10 12s-2.01 6.92-5 8.65C6.47 21.5 8.18 22 10 22c5.52 0 10-4.48 10-10S15.52 2 10 2z"/></svg>
+      </span>
+    </fast-switch>
+    <fast-tooltip anchor="theme-switch" position="bottom">
+      Toggle the Theme
+    </fast-tooltip>
+  </div>
+	<div class="pn-busy-container" id="busy-container">
+	  <div class="bk-root" id="9806943a-935f-43ef-bb87-198efd4202dc" data-root-id="1007"></div>
+	</div>
+  <fast-tooltip anchor="busy-container" position="left">
+    Busy Indicator
+  </fast-tooltip>
+
+  </nav>
+  </fast-design-system-provider>
+
+  <div class="row" id="content">
+
+    <div class="main" id="main"
+    style="margin-left: 0px;"
+    >
+      <div class="card-margin">
+<fast-card class="pn-wrapper">        <span class="fullscreen-button" onclick="toggleFullScreen(this)">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18"><path d="M4.5 11H3v4h4v-1.5H4.5V11zM3 7h1.5V4.5H7V3H3v4zm10.5 6.5H11V15h4v-4h-1.5v2.5zM11 3v1.5h2.5V7H15V3h-4z"/></svg>
+        </span>
+        <div class="bk-root" id="775a3e2c-56e4-446f-b046-41c3d9d7ac37" data-root-id="1008"></div>
+</fast-card>      </div>
+      <div class="card-margin">
+<fast-card class="pn-wrapper">        <span class="fullscreen-button" onclick="toggleFullScreen(this)">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18"><path d="M4.5 11H3v4h4v-1.5H4.5V11zM3 7h1.5V4.5H7V3H3v4zm10.5 6.5H11V15h4v-4h-1.5v2.5zM11 3v1.5h2.5V7H15V3h-4z"/></svg>
+        </span>
+        <div class="bk-root" id="9cfb371f-3e1c-441f-a974-e741f7cd5381" data-root-id="1009"></div>
+</fast-card>      </div>
+      <div class="card-margin">
+<fast-card class="pn-wrapper">        <span class="fullscreen-button" onclick="toggleFullScreen(this)">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18"><path d="M4.5 11H3v4h4v-1.5H4.5V11zM3 7h1.5V4.5H7V3H3v4zm10.5 6.5H11V15h4v-4h-1.5v2.5zM11 3v1.5h2.5V7H15V3h-4z"/></svg>
+        </span>
+        <div class="bk-root" id="53f17257-9817-427f-8a09-f114b0d31bf8" data-root-id="1013"></div>
+</fast-card>      </div>
+
+      <fast-dialog id="pn-Modal" hidden style="--dialog-width: 80%; --dialog-height: auto; --background-color: var(--neutral-layer-floating);">
+        <fast-button class="pn-modal-close" id="pn-closeModal">&times;</fast-button>
+	<div>
+	</div>
+      </fast-dialog>
+  </div>
+  </div>
+</div>
+</fast-design-system-provider>
+<script>
+  
+</script>
+<script>
+  function openNav() {
+    document.getElementById("sidebar").style.left = 0;
+    document.getElementById("main").style.marginLeft = "360px";
+    document.getElementById("sidebar-button").onclick = closeNav;
+    var interval = setInterval(function () { window.dispatchEvent(new Event('resize')); }, 10);
+    setTimeout(function () { clearInterval(interval) }, 210)
+  }
+
+  function closeNav() {
+    document.getElementById("sidebar").style.left = "-360px";
+    document.getElementById("main").style.marginLeft = 0;
+    document.getElementById("sidebar-button").onclick = openNav;
+    var interval = setInterval(function () { window.dispatchEvent(new Event('resize')); }, 10);
+    setTimeout(function () { clearInterval(interval) }, 210)
+  }
+
+  var modal = document.getElementById("pn-Modal");
+  var span = document.getElementById("pn-closeModal");
+
+  span.onclick = function() {
+    modal.style.display = "none";
+  }
+
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+</script>
+
+<div class="bk-root" id="0d151228-777a-406f-96d6-734555cf9b94" data-root-id="1004"></div>
+<div class="bk-root" id="fa01dd06-11f1-498a-b5f5-c4f25bc4aed2" data-root-id="1006"></div>
+<div class="bk-root" id="a34714c6-19b2-4208-80df-6610a4bcedf1" data-root-id="1002"></div>
+
+  
+    <script type="text/javascript">
+      const pyodideWorker = new Worker("./distribution_tabs.js");
+      pyodideWorker.busy = false
+      pyodideWorker.queue = []
+      
+      function send_change(jsdoc, event) {
+        if (event.setter_id != null && event.setter_id == 'py') {
+          return
+        } else if (pyodideWorker.busy && event.model && event.attr) {
+          let events = []
+          for (const old_event of pyodideWorker.queue) {
+            if (!(old_event.model === event.model && old_event.attr === event.attr)) {
+              events.push(old_event)
+            }
+          }
+          events.push(event)
+          pyodideWorker.queue = events
+          return
+        }
+        const patch = jsdoc.create_json_patch_string([event])
+        pyodideWorker.busy = true
+        pyodideWorker.postMessage({type: 'patch', patch: patch})
+      }
+      
+      pyodideWorker.onmessage = async (event) => {
+        const msg = event.data
+      
+        const body = document.getElementsByTagName('body')[0]
+        const loading_msgs = document.getElementsByClassName('pn-loading-msg')
+        if (msg.type === 'idle') {
+          if (pyodideWorker.queue.length) {
+            const patch = pyodideWorker.jsdoc.create_json_patch_string(pyodideWorker.queue)
+            pyodideWorker.busy = true
+            pyodideWorker.queue = []
+            pyodideWorker.postMessage({type: 'patch', patch: patch})
+          } else {
+            pyodideWorker.busy = false
+          }
+        } else if (msg.type === 'status') {
+          let loading_msg
+          if (loading_msgs.length) {
+            loading_msg = loading_msgs[0]
+          } else if (body.classList.contains('pn-loading')) {
+            loading_msg = document.createElement('div')
+            loading_msg.classList.add('pn-loading-msg')
+            body.appendChild(loading_msg)
+          }
+          if (loading_msg != null) {
+            loading_msg.innerHTML = msg.msg
+          }
+        } else if (msg.type === 'render') {
+          const docs_json = JSON.parse(msg.docs_json)
+          const render_items = JSON.parse(msg.render_items)
+          const root_ids = JSON.parse(msg.root_ids)
+      
+          // Remap roots in message to element IDs
+          const root_els = document.getElementsByClassName('bk-root')
+          const data_roots = []
+          for (const el of root_els) {
+             el.innerHTML = ''
+             data_roots.push([parseInt(el.getAttribute('data-root-id')), el.id])
+          }
+          data_roots.sort((a, b) => a[0]<b[0] ? -1: 1)
+          const roots = {}
+          for (let i=0; i<data_roots.length; i++) {
+            roots[root_ids[i]] = data_roots[i][1]
+          }
+          render_items[0]['roots'] = roots
+          render_items[0]['root_ids'] = root_ids
+      
+          // Embed content
+          const [views] = await Bokeh.embed.embed_items(docs_json, render_items)
+      
+          // Remove loading spinner and message
+          body.classList.remove("bk", "pn-loading", "arc")
+          for (const loading_msg of loading_msgs) {
+            loading_msg.remove()
+          }
+      
+          // Setup bi-directional syncing
+          pyodideWorker.jsdoc = jsdoc = views[0].model.document
+          jsdoc.on_change(send_change.bind(null, jsdoc), false)
+          pyodideWorker.postMessage({'type': 'rendered'})
+          pyodideWorker.postMessage({'type': 'location', location: JSON.stringify(window.location)})
+        } else if (msg.type === 'patch') {
+          pyodideWorker.jsdoc.apply_json_patch(JSON.parse(msg.patch), msg.buffers, setter_id='py')
+        }
+      };
+    </script>
+    <script type="application/json" id="1139">
+      {"f4587dc4-5953-41e8-afb3-008706f5b3d9":{"defs":[{"extends":null,"module":null,"name":"ReactiveHTML1","overrides":[],"properties":[]},{"extends":null,"module":null,"name":"FlexBox1","overrides":[],"properties":[{"default":"flex-start","kind":null,"name":"align_content"},{"default":"flex-start","kind":null,"name":"align_items"},{"default":"row","kind":null,"name":"flex_direction"},{"default":"wrap","kind":null,"name":"flex_wrap"},{"default":"flex-start","kind":null,"name":"justify_content"}]},{"extends":null,"module":null,"name":"GridStack1","overrides":[],"properties":[{"default":"warn","kind":null,"name":"mode"},{"default":null,"kind":null,"name":"ncols"},{"default":null,"kind":null,"name":"nrows"},{"default":true,"kind":null,"name":"allow_resize"},{"default":true,"kind":null,"name":"allow_drag"},{"default":[],"kind":null,"name":"state"}]},{"extends":null,"module":null,"name":"click1","overrides":[],"properties":[{"default":"","kind":null,"name":"terminal_output"},{"default":"","kind":null,"name":"debug_name"},{"default":0,"kind":null,"name":"clears"}]},{"extends":null,"module":null,"name":"NotificationAreaBase1","overrides":[],"properties":[{"default":"bottom-right","kind":null,"name":"position"},{"default":0,"kind":null,"name":"_clear"}]},{"extends":null,"module":null,"name":"NotificationArea1","overrides":[],"properties":[{"default":[],"kind":null,"name":"notifications"},{"default":"bottom-right","kind":null,"name":"position"},{"default":0,"kind":null,"name":"_clear"},{"default":[{"background":"#ffc107","icon":{"className":"fas fa-exclamation-triangle","color":"white","tagName":"i"},"type":"warning"},{"background":"#007bff","icon":{"className":"fas fa-info-circle","color":"white","tagName":"i"},"type":"info"}],"kind":null,"name":"types"}]},{"extends":null,"module":null,"name":"Notification","overrides":[],"properties":[{"default":null,"kind":null,"name":"background"},{"default":3000,"kind":null,"name":"duration"},{"default":null,"kind":null,"name":"icon"},{"default":"","kind":null,"name":"message"},{"default":null,"kind":null,"name":"notification_type"},{"default":false,"kind":null,"name":"_destroyed"}]},{"extends":null,"module":null,"name":"TemplateActions1","overrides":[],"properties":[{"default":0,"kind":null,"name":"open_modal"},{"default":0,"kind":null,"name":"close_modal"}]},{"extends":null,"module":null,"name":"MaterialTemplateActions1","overrides":[],"properties":[{"default":0,"kind":null,"name":"open_modal"},{"default":0,"kind":null,"name":"close_modal"}]}],"roots":{"references":[{"attributes":{"css_classes":["markdown"],"margin":[5,5,5,5],"name":"139791744764032","sizing_mode":"stretch_width","tags":["main"],"text":"&amp;lt;p&amp;gt;This example demonstrates &amp;lt;strong&amp;gt;how to plot several different types of outputs in a Tab&amp;lt;/strong&amp;gt;.&amp;lt;/p&amp;gt;"},"id":"1008","type":"panel.models.markup.HTML"},{"attributes":{"child":{"id":"1017"},"name":"Plot","title":"Plot"},"id":"1075","type":"Panel"},{"attributes":{"source":{"id":"1046"}},"id":"1053","type":"CDSView"},{"attributes":{},"id":"1088","type":"UnionRenderers"},{"attributes":{"child":{"id":"1085"},"name":"Table","title":"Table"},"id":"1090","type":"Panel"},{"attributes":{"coordinates":null,"data_source":{"id":"1046"},"glyph":{"id":"1049"},"group":null,"hover_glyph":null,"muted_glyph":{"id":"1051"},"nonselection_glyph":{"id":"1050"},"selection_glyph":{"id":"1054"},"view":{"id":"1053"}},"id":"1052","type":"GlyphRenderer"},{"attributes":{},"id":"1056","type":"BasicTickFormatter"},{"attributes":{"axis":{"id":"1030"},"coordinates":null,"dimension":1,"grid_line_alpha":0.25,"grid_line_color":null,"group":null,"ticker":null},"id":"1033","type":"Grid"},{"attributes":{"children":[{"id":"1014"}],"margin":[0,0,0,0],"name":"139791710518000","sizing_mode":"stretch_width","tags":["main"]},"id":"1013","type":"Row"},{"attributes":{"bottom":{"value":0},"fill_color":{"value":"#00aa41"},"hatch_color":{"value":"#00aa41"},"left":{"field":"left"},"right":{"field":"right"},"tags":["apply_ranges"],"top":{"field":"top"}},"id":"1049","type":"Quad"},{"attributes":{"background_fill_color":"#ffffff","below":[{"id":"1026"}],"border_fill_alpha":0,"border_fill_color":"#F7F7F7","center":[{"id":"1029"},{"id":"1033"}],"height":null,"left":[{"id":"1030"}],"margin":[5,5,5,5],"max_height":500,"min_border_bottom":10,"min_border_left":10,"min_border_right":10,"min_border_top":10,"name":"Plot","outline_line_alpha":0.5,"outline_line_color":"#888888","outline_line_width":1,"renderers":[{"id":"1052"}],"sizing_mode":"stretch_both","title":{"id":"1018"},"toolbar":{"id":"1040"},"width":null,"x_range":{"id":"1015"},"x_scale":{"id":"1022"},"y_range":{"id":"1016"},"y_scale":{"id":"1024"}},"id":"1017","subtype":"Figure","type":"Plot"},{"attributes":{"overlay":{"id":"1039"}},"id":"1037","type":"BoxZoomTool"},{"attributes":{"name":"TemplateActions00918"},"id":"1005","type":"TemplateActions1"},{"attributes":{"end":4.089585355972605,"reset_end":4.089585355972605,"reset_start":-3.437921092991293,"start":-3.437921092991293,"tags":[[["values","values",null]]]},"id":"1015","type":"Range1d"},{"attributes":{"coordinates":null,"group":null,"text_color":"#2B2B2B","text_font":"Open Sans, sans-serif","text_font_size":"1.15em"},"id":"1018","type":"Title"},{"attributes":{},"id":"1079","type":"Selection"},{"attributes":{"children":[{"id":"1010"},{"id":"1011"},{"id":"1012"}],"margin":[0,0,0,0],"name":"139791751327504","sizing_mode":"stretch_width","tags":["main"]},"id":"1009","type":"Column"},{"attributes":{"end":70.4,"reset_end":70.4,"reset_start":0.0,"tags":[[["values_count","Count",null]]]},"id":"1016","type":"Range1d"},{"attributes":{},"id":"1024","type":"LinearScale"},{"attributes":{"bottom":{"value":0},"fill_alpha":{"value":1.0},"fill_color":{"value":"#00aa41"},"hatch_alpha":{"value":1.0},"hatch_color":{"value":"#00aa41"},"hatch_scale":{"value":12.0},"hatch_weight":{"value":1.0},"left":{"field":"left"},"line_alpha":{"value":1.0},"line_cap":{"value":"butt"},"line_color":{"value":"black"},"line_dash":{"value":[]},"line_dash_offset":{"value":0},"line_join":{"value":"bevel"},"line_width":{"value":1},"right":{"field":"right"},"tags":["apply_ranges"],"top":{"field":"top"}},"id":"1054","type":"Quad"},{"attributes":{},"id":"1034","type":"SaveTool"},{"attributes":{"css_classes":["markdown"],"margin":[5,5,5,5],"name":"Markdown00779","sizing_mode":"stretch_width","text":"&amp;lt;h3&amp;gt;Distribution Type&amp;lt;/h3&amp;gt;"},"id":"1010","type":"panel.models.markup.HTML"},{"attributes":{},"id":"1060","type":"AllLabels"},{"attributes":{"margin":[0,0,0,0],"sizing_mode":"stretch_width","tabs":[{"id":"1075"},{"id":"1077"},{"id":"1090"}]},"id":"1014","type":"panel.models.tabs.Tabs"},{"attributes":{"data":{"left":{"__ndarray__":"/oW4/yp8BsDIR4Ic0vkDwJIJTDl5dwHAuJYrrEDq/b9MGr/ljuX4v+CdUh/d4PO/6ELMsVa47b8QSvMk867jv3CiNDAfS9O/AOipL/30iD/wQC8Db9rUP1CZcA6bduQ/KJJJm/5/7j+ARREUsUT0P+zBfdpiSfk/WD7qoBRO/j9iXaszY6kBQJib4Ra8KwRAztkX+hSuBkAEGE7dbTAJQA==","dtype":"float64","order":"little","shape":[20]},"right":{"__ndarray__":"yEeCHNL5A8CSCUw5eXcBwLiWK6xA6v2/TBq/5Y7l+L/gnVIf3eDzv+hCzLFWuO2/EErzJPOu479wojQwH0vTvwDoqS/99Ig/8EAvA2/a1D9QmXAOm3bkPyiSSZv+f+4/gEURFLFE9D/swX3aYkn5P1g+6qAUTv4/Yl2rM2OpAUCYm+EWvCsEQM7ZF/oUrgZABBhO3W0wCUA6VoTAxrILQA==","dtype":"float64","order":"little","shape":[20]},"top":[2,7,13,24,24,36,46,52,64,60,58,51,24,18,10,5,2,3,0,1]},"selected":{"id":"1047"},"selection_policy":{"id":"1072"}},"id":"1046","type":"ColumnDataSource"},{"attributes":{"bottom":{"value":0},"fill_alpha":{"value":0.2},"fill_color":{"value":"#00aa41"},"hatch_alpha":{"value":0.2},"hatch_color":{"value":"#00aa41"},"left":{"field":"left"},"line_alpha":{"value":0.2},"right":{"field":"right"},"tags":["apply_ranges"],"top":{"field":"top"}},"id":"1051","type":"Quad"},{"attributes":{"bottom":{"value":0},"fill_alpha":{"value":0.1},"fill_color":{"value":"#00aa41"},"hatch_alpha":{"value":0.1},"hatch_color":{"value":"#00aa41"},"left":{"field":"left"},"line_alpha":{"value":0.1},"right":{"field":"right"},"tags":["apply_ranges"],"top":{"field":"top"}},"id":"1050","type":"Quad"},{"attributes":{},"id":"1027","type":"BasicTicker"},{"attributes":{},"id":"1072","type":"UnionRenderers"},{"attributes":{"css_classes":["loader","light"],"height":20,"margin":[5,10,5,10],"name":"busy_indicator","sizing_mode":"fixed","width":20},"id":"1007","type":"panel.models.markup.HTML"},{"attributes":{"name":"location","reload":false},"id":"1002","type":"panel.models.location.Location"},{"attributes":{},"id":"1047","type":"Selection"},{"attributes":{"margin":[5,5,5,5],"name":"Summary","sizing_mode":"stretch_width","text":"&amp;lt;table class=&amp;quot;dataframe panel-df&amp;quot;&amp;gt;\n  &amp;lt;thead&amp;gt;\n    &amp;lt;tr style=&amp;quot;text-align: right;&amp;quot;&amp;gt;\n      &amp;lt;th&amp;gt;&amp;lt;/th&amp;gt;\n      &amp;lt;th&amp;gt;count&amp;lt;/th&amp;gt;\n      &amp;lt;th&amp;gt;mean&amp;lt;/th&amp;gt;\n      &amp;lt;th&amp;gt;std&amp;lt;/th&amp;gt;\n      &amp;lt;th&amp;gt;min&amp;lt;/th&amp;gt;\n      &amp;lt;th&amp;gt;25%&amp;lt;/th&amp;gt;\n      &amp;lt;th&amp;gt;50%&amp;lt;/th&amp;gt;\n      &amp;lt;th&amp;gt;75%&amp;lt;/th&amp;gt;\n      &amp;lt;th&amp;gt;max&amp;lt;/th&amp;gt;\n    &amp;lt;/tr&amp;gt;\n  &amp;lt;/thead&amp;gt;\n  &amp;lt;tbody&amp;gt;\n    &amp;lt;tr&amp;gt;\n      &amp;lt;th&amp;gt;values&amp;lt;/th&amp;gt;\n      &amp;lt;td&amp;gt;500.0&amp;lt;/td&amp;gt;\n      &amp;lt;td&amp;gt;-0.114538&amp;lt;/td&amp;gt;\n      &amp;lt;td&amp;gt;1.006596&amp;lt;/td&amp;gt;\n      &amp;lt;td&amp;gt;-2.810629&amp;lt;/td&amp;gt;\n      &amp;lt;td&amp;gt;-0.822284&amp;lt;/td&amp;gt;\n      &amp;lt;td&amp;gt;-0.052812&amp;lt;/td&amp;gt;\n      &amp;lt;td&amp;gt;0.577889&amp;lt;/td&amp;gt;\n      &amp;lt;td&amp;gt;3.462293&amp;lt;/td&amp;gt;\n    &amp;lt;/tr&amp;gt;\n  &amp;lt;/tbody&amp;gt;\n&amp;lt;/table&amp;gt;"},"id":"1076","type":"panel.models.markup.HTML"},{"attributes":{"axis_label":"Count","axis_label_standoff":10,"axis_label_text_color":"#2B2B2B","axis_label_text_font":"Open Sans, sans-serif","axis_label_text_font_size":"1.25em","axis_label_text_font_style":"normal","axis_line_alpha":0.1,"axis_line_color":"#2B2B2B","coordinates":null,"formatter":{"id":"1059"},"group":null,"major_label_policy":{"id":"1060"},"major_label_text_color":"#2B2B2B","major_label_text_font":"Open Sans, sans-serif","major_tick_line_alpha":0.5,"major_tick_line_color":"#2B2B2B","minor_tick_line_alpha":0.25,"minor_tick_line_color":"#2B2B2B","ticker":{"id":"1031"}},"id":"1030","type":"LinearAxis"},{"attributes":{"data":{"values":{"__ndarray__":"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","dtype":"float64","order":"little","shape":[500]}},"selected":{"id":"1079"},"selection_policy":{"id":"1088"}},"id":"1078","type":"ColumnDataSource"},{"attributes":{"active_drag":{"id":"1035"},"active_scroll":{"id":"1036"},"tools":[{"id":"1034"},{"id":"1035"},{"id":"1036"},{"id":"1037"},{"id":"1038"}]},"id":"1040","type":"Toolbar"},{"attributes":{},"id":"1081","type":"NumberEditor"},{"attributes":{},"id":"1059","type":"BasicTickFormatter"},{"attributes":{"height":0,"margin":[0,0,0,0],"name":"js_area","sizing_mode":"fixed","width":0},"id":"1004","type":"panel.models.markup.HTML"},{"attributes":{"active":0,"button_type":"success","labels":["NORMAL","UNIFORM","LOG-NORMAL","EXPONENTIAL"],"margin":[5,10,5,10],"sizing_mode":"stretch_width"},"id":"1011","type":"RadioButtonGroup"},{"attributes":{},"id":"1038","type":"ResetTool"},{"attributes":{"source":{"id":"1078"}},"id":"1087","type":"CDSView"},{"attributes":{"bottom_units":"screen","coordinates":null,"fill_alpha":0.5,"fill_color":"lightgrey","group":null,"left_units":"screen","level":"overlay","line_alpha":1.0,"line_color":"black","line_dash":[4,4],"line_width":2,"right_units":"screen","syncable":false,"top_units":"screen"},"id":"1039","type":"BoxAnnotation"},{"attributes":{"format":"0,0.0[00000]"},"id":"1080","type":"NumberFormatter"},{"attributes":{},"id":"1022","type":"LinearScale"},{"attributes":{"columns":[{"id":"1082"}],"height":300,"name":"Table","reorderable":false,"source":{"id":"1078"},"view":{"id":"1087"},"width":400},"id":"1085","type":"DataTable"},{"attributes":{"axis_label":"values","axis_label_standoff":10,"axis_label_text_color":"#2B2B2B","axis_label_text_font":"Open Sans, sans-serif","axis_label_text_font_size":"1.25em","axis_label_text_font_style":"normal","axis_line_alpha":0.1,"axis_line_color":"#2B2B2B","coordinates":null,"formatter":{"id":"1056"},"group":null,"major_label_policy":{"id":"1057"},"major_label_text_color":"#2B2B2B","major_label_text_font":"Open Sans, sans-serif","major_tick_line_alpha":0.5,"major_tick_line_color":"#2B2B2B","minor_tick_line_alpha":0.25,"minor_tick_line_color":"#2B2B2B","ticker":{"id":"1027"}},"id":"1026","type":"LinearAxis"},{"attributes":{"editor":{"id":"1081"},"field":"values","formatter":{"id":"1080"},"title":"values"},"id":"1082","type":"TableColumn"},{"attributes":{},"id":"1036","type":"WheelZoomTool"},{"attributes":{},"id":"1057","type":"AllLabels"},{"attributes":{"end":2000,"margin":[5,10,5,10],"sizing_mode":"stretch_width","start":0,"title":"Number of observations","value":500},"id":"1012","type":"Slider"},{"attributes":{},"id":"1035","type":"PanTool"},{"attributes":{},"id":"1031","type":"BasicTicker"},{"attributes":{"data":{"id":"1005"},"margin":[0,0,0,0],"name":"actions","scripts":{"close_modal":["document.getElementById(&amp;#x27;pn-Modal&amp;#x27;).style.display = &amp;#x27;none&amp;#x27;"],"open_modal":["document.getElementById(&amp;#x27;pn-Modal&amp;#x27;).style.display = &amp;#x27;block&amp;#x27;"]},"subscribed_events":["dom_event"]},"id":"1006","type":"panel.models.reactive_html.ReactiveHTML"},{"attributes":{"axis":{"id":"1026"},"coordinates":null,"grid_line_alpha":0.25,"grid_line_color":null,"group":null,"ticker":null},"id":"1029","type":"Grid"},{"attributes":{"child":{"id":"1076"},"name":"Summary","title":"Summary"},"id":"1077","type":"Panel"}],"root_ids":["1002","1004","1006","1007","1008","1009","1013"]},"title":"Distribution Tabs","version":"2.4.3"}}
+    </script>
+    <script type="text/javascript">
+      (function() {
+        const fn = function() {
+          Bokeh.safely(function() {
+            (function(root) {
+              function embed_document(root) {
+              const docs_json = document.getElementById('1139').textContent;
+              const render_items = [{"docid":"f4587dc4-5953-41e8-afb3-008706f5b3d9","root_ids":["1002","1004","1006","1007","1008","1009","1013"],"roots":{"1002":"a34714c6-19b2-4208-80df-6610a4bcedf1","1004":"0d151228-777a-406f-96d6-734555cf9b94","1006":"fa01dd06-11f1-498a-b5f5-c4f25bc4aed2","1007":"9806943a-935f-43ef-bb87-198efd4202dc","1008":"775a3e2c-56e4-446f-b046-41c3d9d7ac37","1009":"9cfb371f-3e1c-441f-a974-e741f7cd5381","1013":"53f17257-9817-427f-8a09-f114b0d31bf8"}}];
+              root.Bokeh.embed.embed_items(docs_json, render_items);
+              }
+              if (root.Bokeh !== undefined) {
+                embed_document(root);
+              } else {
+                let attempts = 0;
+                const timer = setInterval(function(root) {
+                  if (root.Bokeh !== undefined) {
+                    clearInterval(timer);
+                    embed_document(root);
+                  } else {
+                    attempts++;
+                    if (attempts > 100) {
+                      clearInterval(timer);
+                      console.log("Bokeh: ERROR: Unable to run BokehJS code because BokehJS library is missing");
+                    }
+                  }
+                }, 10, root)
+              }
+            })(window);
+          });
+        };
+        if (document.readyState != "loading") fn();
+        else document.addEventListener("DOMContentLoaded", fn);
+      })();
+    </script>
+  </body>
+</html>

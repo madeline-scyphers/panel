@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Custom PDB Input Component using Vue.js</title>
+<link rel="icon" href="https://panel.holoviz.org/_static/icons/favicon.ico" type=""><link rel="manifest" href="site.webmanifest"><meta name="name" content="Custom PDB Input Component using Vue.js"><link rel="manifest" href="">    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-vue@latest/dist/bootstrap-vue.min.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.holoviz.org/panel/0.14.4/dist/css/card.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.holoviz.org/panel/0.14.4/dist/css/json.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.holoviz.org/panel/0.14.4/dist/css/dataframe.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.holoviz.org/panel/0.14.4/dist/css/loading.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.holoviz.org/panel/0.14.4/dist/css/widgets.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.holoviz.org/panel/0.14.4/dist/css/debugger.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.holoviz.org/panel/0.14.4/dist/css/alerts.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.holoviz.org/panel/0.14.4/dist/css/markdown.css" type="text/css" />
+    <style>
+        
+    .bk.pn-loading.arc:before {
+      background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHN0eWxlPSJtYXJnaW46IGF1dG87IGJhY2tncm91bmQ6IG5vbmU7IGRpc3BsYXk6IGJsb2NrOyBzaGFwZS1yZW5kZXJpbmc6IGF1dG87IiB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ieE1pZFlNaWQiPiAgPGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYzNjM2MzIiBzdHJva2Utd2lkdGg9IjEwIiByPSIzNSIgc3Ryb2tlLWRhc2hhcnJheT0iMTY0LjkzMzYxNDMxMzQ2NDE1IDU2Ljk3Nzg3MTQzNzgyMTM4Ij4gICAgPGFuaW1hdGVUcmFuc2Zvcm0gYXR0cmlidXRlTmFtZT0idHJhbnNmb3JtIiB0eXBlPSJyb3RhdGUiIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIiBkdXI9IjFzIiB2YWx1ZXM9IjAgNTAgNTA7MzYwIDUwIDUwIiBrZXlUaW1lcz0iMDsxIj48L2FuaW1hdGVUcmFuc2Zvcm0+ICA8L2NpcmNsZT48L3N2Zz4=");
+      background-size: auto calc(min(50%, 400px));
+    }
+    
+    </style>
+
+<script type="text/javascript">
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./serviceWorker.js').then(reg => {
+    reg.onupdatefound = () => {
+      const installingWorker = reg.installing;
+      installingWorker.onstatechange = () => {
+        if (installingWorker.state === 'installed' &&
+            navigator.serviceWorker.controller) {
+          // Reload page if service worker is replaced
+          location.reload();
+        }
+      }
+    }
+  })
+}
+</script>
+
+<script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-2.4.3.min.js"></script><script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-gl-2.4.3.min.js"></script><script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-widgets-2.4.3.min.js"></script><script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-tables-2.4.3.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap-vue@latest/dist/bootstrap-vue.min.js"></script><script type="text/javascript" src="https://cdn.holoviz.org/panel/0.14.4/dist/panel.min.js"></script><script type="text/javascript">
+    Bokeh.set_log_level("info");
+</script><!-- Template CSS -->
+<link rel="stylesheet" href="https://cdn.holoviz.org/panel/0.14.4/dist/bundled/bootstrap4/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.holoviz.org/panel/0.14.4/dist/bundled/bootstraptemplate/bootstrap.css">
+<link rel="stylesheet" href="https://cdn.holoviz.org/panel/0.14.4/dist/bundled/defaulttheme/default.css">
+
+<style>
+  #sidebar {
+    width: 350px;
+  }
+</style>
+
+<!-- Template JS -->
+<script src="https://cdn.holoviz.org/panel/0.14.4/dist/bundled/jquery/jquery.slim.min.js"></script>
+<script src="https://cdn.holoviz.org/panel/0.14.4/dist/bundled/bootstrap4/js/bootstrap.bundle.min.js"></script>
+  </head>
+  <body class="bk pn-loading arc">
+<div class="container-fluid d-flex flex-column vh-100 overflow-hidden" id="container">
+  <nav class="navbar navbar-expand-md navbar-dark sticky-top shadow" style="background-color: #0072B5 !important;" id="header">
+    <div class="app-header">
+<a class="title" href="/" >&nbsp;Awesome Panel</a><span class="title">-</span><a class="title" href="" >&nbsp;Custom PDB Input Component using Vue.js</a>    </div>
+    <div id="header-items">
+    </div>
+    <div class="pn-busy-container">
+      <div class="bk-root" id="b61b7c24-6aec-4401-a2ff-6b54004edb45" data-root-id="1007"></div>
+    </div>
+  </nav>
+
+  <div class="row overflow-hidden" id="content">
+
+    <div class="col mh-100 float-left" id="main">
+          <div class="bk-root" id="520774d0-bfe8-4270-abff-2aa90502073d" data-root-id="1008"></div>
+          <div class="bk-root" id="be258419-01e6-4b5d-8010-21d1ab09b339" data-root-id="1009"></div>
+    </div>
+  </div>
+
+  <div id="pn-Modal" class="modal pn-modal" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content pn-modal-content">
+	<button class="pn-modal-close" id="pn-closeModal">&times;</button>
+	<div class="modal-body">
+	</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function () {
+    $('#sidebarCollapse').on('click', function () {
+      $('#sidebar').toggleClass('active')
+      $(this).toggleClass('active')
+      var interval = setInterval(function () { window.dispatchEvent(new Event('resize')); }, 10);
+      setTimeout(function () { clearInterval(interval) }, 210)
+    });
+  });
+
+  var modal = document.getElementById("pn-Modal");
+  var span = document.getElementById("pn-closeModal");
+
+  span.onclick = function() {
+    modal.style.display = "none";
+  }
+
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+</script>
+
+<div class="bk-root" id="8aa9c401-bd40-4bed-8341-e59e09d8c148" data-root-id="1004"></div>
+<div class="bk-root" id="391509ba-2c26-4759-a480-0c8c6bea6161" data-root-id="1006"></div>
+<div class="bk-root" id="88a240ad-4f02-4205-9c39-914392b26345" data-root-id="1002"></div>
+
+  
+    <script type="text/javascript">
+      const pyodideWorker = new Worker("./VuePdbInput.js");
+      pyodideWorker.busy = false
+      pyodideWorker.queue = []
+      
+      function send_change(jsdoc, event) {
+        if (event.setter_id != null && event.setter_id == 'py') {
+          return
+        } else if (pyodideWorker.busy && event.model && event.attr) {
+          let events = []
+          for (const old_event of pyodideWorker.queue) {
+            if (!(old_event.model === event.model && old_event.attr === event.attr)) {
+              events.push(old_event)
+            }
+          }
+          events.push(event)
+          pyodideWorker.queue = events
+          return
+        }
+        const patch = jsdoc.create_json_patch_string([event])
+        pyodideWorker.busy = true
+        pyodideWorker.postMessage({type: 'patch', patch: patch})
+      }
+      
+      pyodideWorker.onmessage = async (event) => {
+        const msg = event.data
+      
+        const body = document.getElementsByTagName('body')[0]
+        const loading_msgs = document.getElementsByClassName('pn-loading-msg')
+        if (msg.type === 'idle') {
+          if (pyodideWorker.queue.length) {
+            const patch = pyodideWorker.jsdoc.create_json_patch_string(pyodideWorker.queue)
+            pyodideWorker.busy = true
+            pyodideWorker.queue = []
+            pyodideWorker.postMessage({type: 'patch', patch: patch})
+          } else {
+            pyodideWorker.busy = false
+          }
+        } else if (msg.type === 'status') {
+          let loading_msg
+          if (loading_msgs.length) {
+            loading_msg = loading_msgs[0]
+          } else if (body.classList.contains('pn-loading')) {
+            loading_msg = document.createElement('div')
+            loading_msg.classList.add('pn-loading-msg')
+            body.appendChild(loading_msg)
+          }
+          if (loading_msg != null) {
+            loading_msg.innerHTML = msg.msg
+          }
+        } else if (msg.type === 'render') {
+          const docs_json = JSON.parse(msg.docs_json)
+          const render_items = JSON.parse(msg.render_items)
+          const root_ids = JSON.parse(msg.root_ids)
+      
+          // Remap roots in message to element IDs
+          const root_els = document.getElementsByClassName('bk-root')
+          const data_roots = []
+          for (const el of root_els) {
+             el.innerHTML = ''
+             data_roots.push([parseInt(el.getAttribute('data-root-id')), el.id])
+          }
+          data_roots.sort((a, b) => a[0]<b[0] ? -1: 1)
+          const roots = {}
+          for (let i=0; i<data_roots.length; i++) {
+            roots[root_ids[i]] = data_roots[i][1]
+          }
+          render_items[0]['roots'] = roots
+          render_items[0]['root_ids'] = root_ids
+      
+          // Embed content
+          const [views] = await Bokeh.embed.embed_items(docs_json, render_items)
+      
+          // Remove loading spinner and message
+          body.classList.remove("bk", "pn-loading", "arc")
+          for (const loading_msg of loading_msgs) {
+            loading_msg.remove()
+          }
+      
+          // Setup bi-directional syncing
+          pyodideWorker.jsdoc = jsdoc = views[0].model.document
+          jsdoc.on_change(send_change.bind(null, jsdoc), false)
+          pyodideWorker.postMessage({'type': 'rendered'})
+          pyodideWorker.postMessage({'type': 'location', location: JSON.stringify(window.location)})
+        } else if (msg.type === 'patch') {
+          pyodideWorker.jsdoc.apply_json_patch(JSON.parse(msg.patch), msg.buffers, setter_id='py')
+        }
+      };
+    </script>
+    <script type="application/json" id="1014">
+      {"49ff9049-cc1d-479b-a2f6-beda1723e205":{"defs":[{"extends":null,"module":null,"name":"ReactiveHTML1","overrides":[],"properties":[]},{"extends":null,"module":null,"name":"FlexBox1","overrides":[],"properties":[{"default":"flex-start","kind":null,"name":"align_content"},{"default":"flex-start","kind":null,"name":"align_items"},{"default":"row","kind":null,"name":"flex_direction"},{"default":"wrap","kind":null,"name":"flex_wrap"},{"default":"flex-start","kind":null,"name":"justify_content"}]},{"extends":null,"module":null,"name":"GridStack1","overrides":[],"properties":[{"default":"warn","kind":null,"name":"mode"},{"default":null,"kind":null,"name":"ncols"},{"default":null,"kind":null,"name":"nrows"},{"default":true,"kind":null,"name":"allow_resize"},{"default":true,"kind":null,"name":"allow_drag"},{"default":[],"kind":null,"name":"state"}]},{"extends":null,"module":null,"name":"click1","overrides":[],"properties":[{"default":"","kind":null,"name":"terminal_output"},{"default":"","kind":null,"name":"debug_name"},{"default":0,"kind":null,"name":"clears"}]},{"extends":null,"module":null,"name":"NotificationAreaBase1","overrides":[],"properties":[{"default":"bottom-right","kind":null,"name":"position"},{"default":0,"kind":null,"name":"_clear"}]},{"extends":null,"module":null,"name":"NotificationArea1","overrides":[],"properties":[{"default":[],"kind":null,"name":"notifications"},{"default":"bottom-right","kind":null,"name":"position"},{"default":0,"kind":null,"name":"_clear"},{"default":[{"background":"#ffc107","icon":{"className":"fas fa-exclamation-triangle","color":"white","tagName":"i"},"type":"warning"},{"background":"#007bff","icon":{"className":"fas fa-info-circle","color":"white","tagName":"i"},"type":"info"}],"kind":null,"name":"types"}]},{"extends":null,"module":null,"name":"Notification","overrides":[],"properties":[{"default":null,"kind":null,"name":"background"},{"default":3000,"kind":null,"name":"duration"},{"default":null,"kind":null,"name":"icon"},{"default":"","kind":null,"name":"message"},{"default":null,"kind":null,"name":"notification_type"},{"default":false,"kind":null,"name":"_destroyed"}]},{"extends":null,"module":null,"name":"TemplateActions1","overrides":[],"properties":[{"default":0,"kind":null,"name":"open_modal"},{"default":0,"kind":null,"name":"close_modal"}]},{"extends":null,"module":null,"name":"MaterialTemplateActions1","overrides":[],"properties":[{"default":0,"kind":null,"name":"open_modal"},{"default":0,"kind":null,"name":"close_modal"}]},{"extends":null,"module":null,"name":"BasicVueComponent1","overrides":[],"properties":[]},{"extends":null,"module":null,"name":"BootstrapVueComponent1","overrides":[],"properties":[]},{"extends":null,"module":null,"name":"PDBInput1","overrides":[],"properties":[{"default":"","kind":null,"name":"value"}]}],"roots":{"references":[{"attributes":{"css_classes":["markdown"],"margin":[5,5,5,5],"name":"ParamFunction00102","sizing_mode":"stretch_width","text":"&amp;lt;p&amp;gt;Please specify a PDB ID.&amp;lt;/p&amp;gt;"},"id":"1013","type":"panel.models.markup.HTML"},{"attributes":{"children":[{"id":"1011"},{"id":"1012"}],"margin":[0,0,0,0],"name":"140202727528528","sizing_mode":"stretch_width","tags":["main"]},"id":"1009","type":"Column"},{"attributes":{"height":0,"margin":[0,0,0,0],"name":"js_area","sizing_mode":"fixed","width":0},"id":"1004","type":"panel.models.markup.HTML"},{"attributes":{"data":{"id":"1005"},"margin":[0,0,0,0],"name":"actions","scripts":{"close_modal":["document.getElementById(&amp;#x27;pn-Modal&amp;#x27;).style.display = &amp;#x27;none&amp;#x27;"],"open_modal":["document.getElementById(&amp;#x27;pn-Modal&amp;#x27;).style.display = &amp;#x27;block&amp;#x27;"]},"subscribed_events":["dom_event"]},"id":"1006","type":"panel.models.reactive_html.ReactiveHTML"},{"attributes":{"name":"PDBInput00101"},"id":"1010","type":"PDBInput1"},{"attributes":{"name":"location","reload":false},"id":"1002","type":"panel.models.location.Location"},{"attributes":{"data":{"id":"1010"},"height":90,"html":"\n&amp;lt;div id=&amp;quot;container-${id}&amp;quot; style=&amp;quot;height:100%; width:100%&amp;quot;&amp;gt;\n  &amp;lt;vue-component&amp;gt;&amp;lt;/vue-component&amp;gt;\n&amp;lt;/div&amp;gt;\n","margin":[5,5,5,5],"max_width":800,"nodes":["container"],"scripts":{"render":["const template = `\n&amp;lt;div&amp;gt;\n  &amp;lt;b-form v-on:keydown.enter.prevent&amp;gt;\n    &amp;lt;b-form-input v-model=&amp;quot;pdb_id&amp;quot; placeholder=&amp;quot;Enter PDB ID&amp;quot; required&amp;gt;&amp;lt;/b-form-input&amp;gt;\n    &amp;lt;b-button variant=&amp;quot;secondary&amp;quot; size=&amp;quot;sm&amp;quot; v-on:click=&amp;quot;setPDBId&amp;quot; style=&amp;quot;margin-top:10px;width:100%&amp;quot;&amp;gt;\n        Retrieve PDB metadata\n    &amp;lt;/b-button&amp;gt;\n  &amp;lt;/b-form&amp;gt;\n&amp;lt;/div&amp;gt;`\nconst vue_component = {\n  template: template,\n  delimiters: [&amp;#x27;[[&amp;#x27;, &amp;#x27;]]&amp;#x27;],\n  data: function () {\n    return {\n      pdb_id: data.value,\n    }\n  },\n  methods: {\n    setPDBId() {\n      data.value = this.pdb_id\n    }\n  }\n}\nconst el = new Vue({\n    el: container,\n    components: {\n        &amp;#x27;vue-component&amp;#x27;: vue_component\n    } \n})"]},"sizing_mode":"stretch_width","subscribed_events":["dom_event"]},"id":"1011","type":"panel.models.reactive_html.ReactiveHTML"},{"attributes":{"name":"TemplateActions00119"},"id":"1005","type":"TemplateActions1"},{"attributes":{"css_classes":["loader","light"],"height":20,"margin":[5,10,5,10],"name":"busy_indicator","sizing_mode":"fixed","width":20},"id":"1007","type":"panel.models.markup.HTML"},{"attributes":{"children":[{"id":"1013"}],"margin":[0,0,0,0],"name":"Row00106","sizing_mode":"stretch_width"},"id":"1012","type":"Row"},{"attributes":{"css_classes":["markdown"],"margin":[5,5,5,5],"name":"140202716387840","sizing_mode":"stretch_width","tags":["main"],"text":"&amp;lt;h1&amp;gt;Featurize Protein Structure&amp;lt;/h1&amp;gt;\n&amp;lt;p&amp;gt;Use the Vue component below to retrieve PDB metadata from &amp;lt;a href=&amp;quot;https://klifs.net/&amp;quot;&amp;gt;KLIFS&amp;lt;/a&amp;gt;. For example for &amp;lt;code&amp;gt;2xyu&amp;lt;/code&amp;gt; or &amp;lt;code&amp;gt;4WSQ&amp;lt;/code&amp;gt;&amp;lt;/p&amp;gt;"},"id":"1008","type":"panel.models.markup.HTML"}],"root_ids":["1002","1004","1006","1007","1008","1009"]},"title":"Custom PDB Input Component using Vue.js","version":"2.4.3"}}
+    </script>
+    <script type="text/javascript">
+      (function() {
+        const fn = function() {
+          Bokeh.safely(function() {
+            (function(root) {
+              function embed_document(root) {
+              const docs_json = document.getElementById('1014').textContent;
+              const render_items = [{"docid":"49ff9049-cc1d-479b-a2f6-beda1723e205","root_ids":["1002","1004","1006","1007","1008","1009"],"roots":{"1002":"88a240ad-4f02-4205-9c39-914392b26345","1004":"8aa9c401-bd40-4bed-8341-e59e09d8c148","1006":"391509ba-2c26-4759-a480-0c8c6bea6161","1007":"b61b7c24-6aec-4401-a2ff-6b54004edb45","1008":"520774d0-bfe8-4270-abff-2aa90502073d","1009":"be258419-01e6-4b5d-8010-21d1ab09b339"}}];
+              root.Bokeh.embed.embed_items(docs_json, render_items);
+              }
+              if (root.Bokeh !== undefined) {
+                embed_document(root);
+              } else {
+                let attempts = 0;
+                const timer = setInterval(function(root) {
+                  if (root.Bokeh !== undefined) {
+                    clearInterval(timer);
+                    embed_document(root);
+                  } else {
+                    attempts++;
+                    if (attempts > 100) {
+                      clearInterval(timer);
+                      console.log("Bokeh: ERROR: Unable to run BokehJS code because BokehJS library is missing");
+                    }
+                  }
+                }, 10, root)
+              }
+            })(window);
+          });
+        };
+        if (document.readyState != "loading") fn();
+        else document.addEventListener("DOMContentLoaded", fn);
+      })();
+    </script>
+  </body>
+</html>

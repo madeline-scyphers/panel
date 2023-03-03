@@ -1,0 +1,2074 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="Docutils 0.19: https://docutils.sourceforge.io/" name="generator"/>
+<link href="../../site.webmanifest" rel="manifest"/>
+<title>Streaming Videostream — Panel v0.14.4</title>
+<script>
+  document.documentElement.dataset.mode = localStorage.getItem("mode") || "light";
+  document.documentElement.dataset.theme = localStorage.getItem("theme") || "light"
+</script>
+<!-- Loaded before other Sphinx assets -->
+<link href="../../_static/styles/theme.css?digest=92025949c220c2e29695" rel="stylesheet"/>
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=92025949c220c2e29695" rel="stylesheet"/>
+<link href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css" rel="stylesheet"/>
+<link as="font" crossorigin="" href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="../../_static/pygments.css" rel="stylesheet" type="text/css">
+<link href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" rel="stylesheet" type="text/css">
+<link href="../../_static/graphviz.css" rel="stylesheet" type="text/css">
+<link href="../../_static/copybutton.css" rel="stylesheet" type="text/css">
+<link href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" rel="stylesheet" type="text/css">
+<link href="../../_static/nbsite.css" rel="stylesheet" type="text/css"/>
+<link href="../../_static/css/custom.css" rel="stylesheet" type="text/css"/>
+<link href="../../_static/css/dataframe.css" rel="stylesheet" type="text/css"/>
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=92025949c220c2e29695" rel="preload"/>
+<script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+<script src="../../_static/jquery.js"></script>
+<script src="../../_static/underscore.js"></script>
+<script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+<script src="../../_static/doctools.js"></script>
+<script src="../../_static/sphinx_highlight.js"></script>
+<script src="../../_static/clipboard.min.js"></script>
+<script src="../../_static/copybutton.js"></script>
+<script src="../../_static/design-tabs.js"></script>
+<script src="../../_static/ServiceHandler.js"></script>
+<script async="async" src="https://www.google-analytics.com/analytics.js"></script>
+<script>
+                window.ga = window.ga || function () {
+                    (ga.q = ga.q || []).push(arguments) };
+                ga.l = +new Date;
+                ga('create', 'UA-154795830-2', 'auto');
+                ga('set', 'anonymizeIp', true);
+                ga('send', 'pageview');
+            </script>
+<link href="../../_static/favicon.ico" rel="shortcut icon">
+<link href="../../genindex.html" rel="index" title="Index"/>
+<link href="../../search.html" rel="search" title="Search"/>
+<link href="../components/CanvasDraw.html" rel="next" title="CanvasDraw"/>
+<link href="streaming_tabulator.html" rel="prev" title="Streaming Tabulator"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+</link></link></link></link></link></link></head>
+<body data-default-mode="light" data-offset="180" data-spy="scroll" data-target="#bd-toc-nav">
+<div class="bd-header-announcement container-fluid" id="banner">
+</div>
+<nav class="navbar navbar-dark navbar-expand-lg bg-dark fixed-top bd-navbar" id="navbar-main"><div class="bd-header__inner container-xl">
+<div id="navbar-start">
+<a class="navbar-brand logo" href="../../index.html">
+<img alt="Logo image" class="logo__image only-light" src="../../_static/logo_horizontal.png"/>
+<img alt="Logo image" class="logo__image only-dark" src="../../_static/logo_horizontal.png"/>
+</a>
+</div>
+<button aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbar-collapsible" data-toggle="collapse" type="button">
+<span class="fas fa-bars"></span>
+</button>
+<div class="col-lg-9 collapse navbar-collapse" id="navbar-collapsible">
+<div class="mr-auto" id="navbar-center">
+<div class="navbar-center-item">
+<ul class="navbar-nav" id="navbar-main-elements">
+<li class="toctree-l1 nav-item">
+<a class="reference internal nav-link" href="../../index.html">
+  Overview
+ </a>
+</li>
+<li class="toctree-l1 nav-item">
+<a class="reference internal nav-link" href="../../getting_started/index.html">
+  Getting Started
+ </a>
+</li>
+<li class="toctree-l1 nav-item">
+<a class="reference internal nav-link" href="../../user_guide/index.html">
+  User Guide
+ </a>
+</li>
+<li class="toctree-l1 current active nav-item">
+<a class="reference internal nav-link" href="../index.html">
+  Gallery
+ </a>
+</li>
+<li class="toctree-l1 nav-item">
+<a class="reference internal nav-link" href="../../reference/index.html">
+  Reference Gallery
+ </a>
+</li>
+<li class="toctree-l1 nav-item">
+<a class="reference internal nav-link" href="../../developer_guide/index.html">
+  Developer Guide
+ </a>
+</li>
+<li class="toctree-l1 nav-item">
+<a class="reference internal nav-link" href="../../api/index.html">
+  API Reference
+ </a>
+</li>
+<li class="toctree-l1 nav-item">
+<a class="reference internal nav-link" href="../../releases.html">
+  Releases
+ </a>
+</li>
+<li class="toctree-l1 nav-item">
+<a class="reference internal nav-link" href="../../FAQ.html">
+  FAQ
+ </a>
+</li>
+<li class="toctree-l1 nav-item">
+<a class="reference internal nav-link" href="../../about/index.html">
+  About
+ </a>
+</li>
+</ul>
+</div>
+</div>
+<div id="navbar-end">
+<div class="navbar-end-item">
+<ul aria-label="Icon Links" class="navbar-nav" id="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/holoviz/panel" rel="noopener" target="_blank" title="GitHub"><span><i class="fab fa-github-square"></i></span>
+<label class="sr-only">GitHub</label></a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://twitter.com/Panel_Org" rel="noopener" target="_blank" title="Twitter"><span><i class="fab fa-twitter-square"></i></span>
+<label class="sr-only">Twitter</label></a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://discourse.holoviz.org/c/panel/5" rel="noopener" target="_blank" title="Discourse"><span><i class="fab fa-discourse"></i></span>
+<label class="sr-only">Discourse</label></a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</nav>
+<div class="bd-container container-xl">
+<div class="bd-container__inner row">
+<!-- Only show if we have sidebars configured, else just a small margin  -->
+<div class="bd-sidebar-primary col-12 col-md-2 bd-sidebar">
+<div class="sidebar-start-items"><form action="../../search.html" class="bd-search d-flex align-items-center" method="get">
+<i class="icon fas fa-search"></i>
+<input aria-label="Search the docs ..." autocomplete="off" class="form-control" id="search-input" name="q" placeholder="Search the docs ..." type="search"/>
+</form><nav aria-label="Main navigation" class="bd-links" id="bd-docs-nav">
+<div class="bd-toc-item active">
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1">
+<a class="reference internal" href="../../index.html">
+   Overview
+  </a>
+</li>
+<li class="toctree-l1 has-children">
+<a class="reference internal" href="../../getting_started/index.html">
+   Getting Started
+  </a>
+<input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox">
+<label for="toctree-checkbox-1">
+<i class="fas fa-chevron-down">
+</i>
+</label>
+<ul>
+<li class="toctree-l2">
+<a class="reference internal" href="../../getting_started/installation.html">
+     Installation
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../getting_started/build_app.html">
+     Build an app
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../getting_started/core_concepts.html">
+     Core Concepts
+    </a>
+</li>
+</ul>
+</input></li>
+<li class="toctree-l1 has-children">
+<a class="reference internal" href="../../user_guide/index.html">
+   User Guide
+  </a>
+<input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+<label for="toctree-checkbox-2">
+<i class="fas fa-chevron-down">
+</i>
+</label>
+<ul>
+<li class="toctree-l2">
+<a class="reference internal" href="../../user_guide/Overview.html">
+     Overview
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../user_guide/Components.html">
+     Components
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../user_guide/APIs.html">
+     APIs
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../user_guide/Customization.html">
+     Customization
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../user_guide/Interact.html">
+     Interact
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../user_guide/Widgets.html">
+     Widgets
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../user_guide/Param.html">
+     Parameters
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../user_guide/Links.html">
+     Linking
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../user_guide/Pipelines.html">
+     Pipelines
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../user_guide/Templates.html">
+     Templates
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../user_guide/Performance_and_Debugging.html">
+     Performance and Debugging
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../user_guide/Session_State_and_Callbacks.html">
+     Session state &amp; Callbacks
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../user_guide/Async_and_Concurrency.html">
+     Asynchronous and Concurrent Process
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../user_guide/Display_and_Export.html">
+     Display &amp; Export
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../user_guide/Running_in_Webassembly.html">
+     Running Panel in the Browser with WASM
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../user_guide/Server_Configuration.html">
+     Server Configuration
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../user_guide/Server_Deployment.html">
+     Server Deployment
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../user_guide/Authentication.html">
+     Authentication
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../user_guide/Django.html">
+     Django Integration
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../user_guide/FastAPI.html">
+     FastAPI Integration
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../user_guide/Custom_Components.html">
+     Building Custom Components
+    </a>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children">
+<a class="reference internal" href="../index.html">
+   Gallery
+  </a>
+<input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+<label for="toctree-checkbox-3">
+<i class="fas fa-chevron-down">
+</i>
+</label>
+<ul class="current">
+<li class="toctree-l2">
+<a class="reference internal" href="../demos/VTKInteractive.html">
+     VTKInteractive
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../demos/VTKSlicer.html">
+     VTKSlicer
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../demos/VTKWarp.html">
+     VTKWarp
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../demos/attractors.html">
+     Attractors
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../demos/gapminders.html">
+     Gapminders
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../demos/glaciers.html">
+     Glaciers
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../demos/nyc_taxi.html">
+     Nyc Taxi
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../demos/portfolio-optimizer.html">
+     Portfolio-optimizer
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../simple/altair_brushing.html">
+     Altair Brushing
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../simple/altair_choropleth.html">
+     Altair Choropleth
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../simple/clifford_interact.html">
+     Clifford Interact
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../simple/color_speech_recognition.html">
+     Color Speech Recognition
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../simple/deckgl_game_of_life.html">
+     Deckgl Game Of Life
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../simple/defer_data_load.html">
+     Defer Data Load
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../simple/file_download_examples.html">
+     File Download Examples
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../simple/hvplot_explorer.html">
+     Hvplot Explorer
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../simple/iris_kmeans.html">
+     Iris Kmeans
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../simple/loading_spinner.html">
+     Loading Spinner
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../simple/random_number_generator.html">
+     Random Number Generator
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../simple/save_filtered_df.html">
+     Save Filtered Df
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../simple/sync_location.html">
+     Sync Location
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../simple/temperature_distribution.html">
+     Temperature Distribution
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../simple/xgboost_classifier.html">
+     Xgboost Classifier
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../apis/stocks_altair.html">
+     Stocks Altair
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../apis/stocks_hvplot.html">
+     Stocks Hvplot
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../apis/stocks_matplotlib.html">
+     Stocks Matplotlib
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../apis/stocks_plotly.html">
+     Stocks Plotly
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../layout/distribution_tabs.html">
+     Distribution Tabs
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../layout/dynamic_tabs.html">
+     Dynamic Tabs
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../layout/plot_with_columns.html">
+     Plot With Columns
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../dynamic/dynamic_plot_layout.html">
+     Dynamic Plot Layout
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../dynamic/dynamic_timeseries_image_analysis.html">
+     Dynamic Timeseries Image Analysis
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../dynamic/dynamic_ui.html">
+     Dynamic Ui
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../dynamic/dynamic_widget_values.html">
+     Dynamic Widget Values
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../param/action_button.html">
+     Action Button
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../param/deck_gl_global_power_plants.html">
+     Deck Gl Global Power Plants
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../param/download_upload_csv.html">
+     Download Upload Csv
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../param/loading_indicator.html">
+     Loading Indicator
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../param/param_subobjects.html">
+     Param Subobjects
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../param/precedence.html">
+     Precedence
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../param/reactive_plots.html">
+     Reactive Plots
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../param/reactive_tables.html">
+     Reactive Tables
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="hardware_automation.html">
+     Hardware Automation
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="streaming_bokeh.html">
+     Streaming Bokeh
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="streaming_indicator.html">
+     Streaming Indicator
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="streaming_perspective.html">
+     Streaming Perspective
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="streaming_tabulator.html">
+     Streaming Tabulator
+    </a>
+</li>
+<li class="toctree-l2 current active">
+<a class="current reference internal" href="#">
+     Streaming Videostream
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../components/CanvasDraw.html">
+     CanvasDraw
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../components/LeafletHeatMap.html">
+     LeafletHeatMap
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../components/MaterialUI.html">
+     MaterialUI
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../components/VuePdbInput.html">
+     VuePdbInput
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../links/bokeh_property_editor.html">
+     Bokeh Property Editor
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../links/deck_gl_json_editor.html">
+     Deck Gl Json Editor
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../links/holoviews_glyph_link.html">
+     Holoviews Glyph Link
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../links/plotly_link.html">
+     Plotly Link
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../links/vega_heatmap_link.html">
+     Vega Heatmap Link
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../styles/MatplotlibStyle.html">
+     MatplotlibStyle
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../styles/PlotlyStyle.html">
+     PlotlyStyle
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../styles/SeabornStyle.html">
+     SeabornStyle
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../styles/VegaAltairStyle.html">
+     VegaAltairStyle
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../external/DataTable.html">
+     DataTable
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../external/Folium.html">
+     Folium
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../external/deck.gl.html">
+     Deck.gl
+    </a>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children">
+<a class="reference internal" href="../../reference/index.html">
+   Reference Gallery
+  </a>
+<input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+<label for="toctree-checkbox-4">
+<i class="fas fa-chevron-down">
+</i>
+</label>
+<ul>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/panes/Alert.html">
+     Alert
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/panes/Audio.html">
+     Audio
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/panes/Bokeh.html">
+     Bokeh
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/panes/DataFrame.html">
+     DataFrame
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/panes/DeckGL.html">
+     DeckGL
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/panes/ECharts.html">
+     ECharts
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/panes/Folium.html">
+     Folium
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/panes/GIF.html">
+     GIF
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/panes/HTML.html">
+     HTML
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/panes/HoloViews.html">
+     HoloViews
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/panes/IDOM.html">
+     IDOM
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/panes/IPyWidget.html">
+     IPyWidget
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/panes/JPG.html">
+     JPG
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/panes/JSON.html">
+     JSON
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/panes/LaTeX.html">
+     LaTeX
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/panes/Markdown.html">
+     Markdown
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/panes/Matplotlib.html">
+     Matplotlib
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/panes/PDF.html">
+     PDF
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/panes/PNG.html">
+     PNG
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/panes/Param.html">
+     Param
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/panes/Perspective.html">
+     Perspective
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/panes/Plotly.html">
+     Plotly
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/panes/Reacton.html">
+     Reacton
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/panes/SVG.html">
+     SVG
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/panes/Str.html">
+     Str
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/panes/Streamz.html">
+     Streamz
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/panes/VTK.html">
+     VTK
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/panes/VTKJS.html">
+     VTKJS
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/panes/VTKVolume.html">
+     VTKVolume
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/panes/Vega.html">
+     Vega
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/panes/Video.html">
+     Video
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/layouts/Accordion.html">
+     Accordion
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/layouts/Card.html">
+     Card
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/layouts/Column.html">
+     Column
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/layouts/Divider.html">
+     Divider
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/layouts/FlexBox.html">
+     FlexBox
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/layouts/GridBox.html">
+     GridBox
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/layouts/GridSpec.html">
+     GridSpec
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/layouts/GridStack.html">
+     GridStack
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/layouts/Row.html">
+     Row
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/layouts/Tabs.html">
+     Tabs
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/layouts/WidgetBox.html">
+     WidgetBox
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/templates/Bootstrap.html">
+     Bootstrap
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/templates/FastGridTemplate.html">
+     FastGridTemplate
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/templates/FastListTemplate.html">
+     FastListTemplate
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/templates/GoldenLayout.html">
+     GoldenLayout
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/templates/Material.html">
+     Material
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/templates/React.html">
+     React
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/templates/Vanilla.html">
+     Vanilla
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/global/Notifications.html">
+     Notifications
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/indicators/BooleanStatus.html">
+     BooleanStatus
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/indicators/Dial.html">
+     Dial
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/indicators/Gauge.html">
+     Gauge
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/indicators/LinearGauge.html">
+     LinearGauge
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/indicators/LoadingSpinner.html">
+     LoadingSpinner
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/indicators/Number.html">
+     Number
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/indicators/Progress.html">
+     Progress
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/indicators/Tqdm.html">
+     Tqdm
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/indicators/Trend.html">
+     Trend
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/widgets/Ace.html">
+     Ace
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/widgets/ArrayInput.html">
+     ArrayInput
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/widgets/AutocompleteInput.html">
+     AutocompleteInput
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/widgets/Button.html">
+     Button
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/widgets/CheckBoxGroup.html">
+     CheckBoxGroup
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/widgets/CheckButtonGroup.html">
+     CheckButtonGroup
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/widgets/Checkbox.html">
+     Checkbox
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/widgets/ColorPicker.html">
+     ColorPicker
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/widgets/CrossSelector.html">
+     CrossSelector
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/widgets/DataFrame.html">
+     DataFrame
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/widgets/DatePicker.html">
+     DatePicker
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/widgets/DateRangeSlider.html">
+     DateRangeSlider
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/widgets/DateSlider.html">
+     DateSlider
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/widgets/DatetimeInput.html">
+     DatetimeInput
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/widgets/DatetimePicker.html">
+     DatetimePicker
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/widgets/DatetimeRangeInput.html">
+     DatetimeRangeInput
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/widgets/DatetimeRangePicker.html">
+     DatetimeRangePicker
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/widgets/DatetimeRangeSlider.html">
+     DatetimeRangeSlider
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/widgets/Debugger.html">
+     Debugger
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/widgets/DiscretePlayer.html">
+     DiscretePlayer
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/widgets/DiscreteSlider.html">
+     DiscreteSlider
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/widgets/EditableFloatSlider.html">
+     EditableFloatSlider
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/widgets/EditableIntSlider.html">
+     EditableIntSlider
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/widgets/EditableRangeSlider.html">
+     EditableRangeSlider
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/widgets/FileDownload.html">
+     FileDownload
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/widgets/FileInput.html">
+     FileInput
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/widgets/FileSelector.html">
+     FileSelector
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/widgets/FloatInput.html">
+     FloatInput
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/widgets/FloatSlider.html">
+     FloatSlider
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/widgets/IntInput.html">
+     IntInput
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/widgets/IntRangeSlider.html">
+     IntRangeSlider
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/widgets/IntSlider.html">
+     IntSlider
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/widgets/JSONEditor.html">
+     JSONEditor
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/widgets/LiteralInput.html">
+     LiteralInput
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/widgets/MenuButton.html">
+     MenuButton
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/widgets/MultiChoice.html">
+     MultiChoice
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/widgets/MultiSelect.html">
+     MultiSelect
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/widgets/PasswordInput.html">
+     PasswordInput
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/widgets/Player.html">
+     Player
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/widgets/RadioBoxGroup.html">
+     RadioBoxGroup
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/widgets/RadioButtonGroup.html">
+     RadioButtonGroup
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/widgets/RangeSlider.html">
+     RangeSlider
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/widgets/Select.html">
+     Select
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/widgets/SpeechToText.html">
+     SpeechToText
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/widgets/StaticText.html">
+     StaticText
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/widgets/Tabulator.html">
+     Tabulator
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/widgets/Terminal.html">
+     Terminal
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/widgets/TextAreaInput.html">
+     TextAreaInput
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/widgets/TextEditor.html">
+     TextEditor
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/widgets/TextInput.html">
+     TextInput
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/widgets/TextToSpeech.html">
+     TextToSpeech
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/widgets/Toggle.html">
+     Toggle
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/widgets/ToggleGroup.html">
+     ToggleGroup
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../reference/widgets/VideoStream.html">
+     VideoStream
+    </a>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children">
+<a class="reference internal" href="../../developer_guide/index.html">
+   Developer Guide
+  </a>
+<input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+<label for="toctree-checkbox-5">
+<i class="fas fa-chevron-down">
+</i>
+</label>
+<ul>
+<li class="toctree-l2">
+<a class="reference internal" href="../../developer_guide/testing.html">
+     Testing
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../developer_guide/Developing_Custom_Models.html">
+     Developing custom models
+    </a>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children">
+<a class="reference internal" href="../../api/index.html">
+   API Reference
+  </a>
+<input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+<label for="toctree-checkbox-6">
+<i class="fas fa-chevron-down">
+</i>
+</label>
+<ul>
+<li class="toctree-l2">
+<a class="reference internal" href="../../api/panel.io.html">
+     io
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../api/panel.layout.html">
+     layout
+    </a>
+</li>
+<li class="toctree-l2 has-children">
+<a class="reference internal" href="../../api/panel.pane.html">
+     pane
+    </a>
+<input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+<label for="toctree-checkbox-7">
+<i class="fas fa-chevron-down">
+</i>
+</label>
+<ul>
+<li class="toctree-l3">
+<a class="reference internal" href="../../api/panel.pane.vtk.html">
+       panel.vtk Package
+      </a>
+</li>
+</ul>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../api/panel.param.html">
+     param
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../api/panel.pipeline.html">
+     pipeline
+    </a>
+</li>
+<li class="toctree-l2 has-children">
+<a class="reference internal" href="../../api/panel.template.html">
+     template
+    </a>
+<input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+<label for="toctree-checkbox-8">
+<i class="fas fa-chevron-down">
+</i>
+</label>
+<ul>
+<li class="toctree-l3">
+<a class="reference internal" href="../../api/panel.template.bootstrap.html">
+       panel.bootstrap Package
+      </a>
+</li>
+<li class="toctree-l3 has-children">
+<a class="reference internal" href="../../api/panel.template.fast.html">
+       panel.fast Package
+      </a>
+<input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+<label for="toctree-checkbox-9">
+<i class="fas fa-chevron-down">
+</i>
+</label>
+<ul>
+<li class="toctree-l4">
+<a class="reference internal" href="../../api/panel.template.fast.grid.html">
+         panel.grid Package
+        </a>
+</li>
+<li class="toctree-l4">
+<a class="reference internal" href="../../api/panel.template.fast.list.html">
+         panel.list Package
+        </a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3">
+<a class="reference internal" href="../../api/panel.template.golden.html">
+       panel.golden Package
+      </a>
+</li>
+<li class="toctree-l3">
+<a class="reference internal" href="../../api/panel.template.material.html">
+       panel.material Package
+      </a>
+</li>
+<li class="toctree-l3">
+<a class="reference internal" href="../../api/panel.template.react.html">
+       panel.react Package
+      </a>
+</li>
+<li class="toctree-l3">
+<a class="reference internal" href="../../api/panel.template.theme.html">
+       panel.theme Package
+      </a>
+</li>
+<li class="toctree-l3">
+<a class="reference internal" href="../../api/panel.template.vanilla.html">
+       panel.vanilla Package
+      </a>
+</li>
+</ul>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../api/panel.widgets.html">
+     widgets
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../api/panel.viewable.html">
+     viewable
+    </a>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="../../api/panel.util.html">
+     util
+    </a>
+</li>
+</ul>
+</li>
+<li class="toctree-l1">
+<a class="reference internal" href="../../releases.html">
+   Releases
+  </a>
+</li>
+<li class="toctree-l1">
+<a class="reference internal" href="../../FAQ.html">
+   FAQ
+  </a>
+</li>
+<li class="toctree-l1 has-children">
+<a class="reference internal" href="../../about/index.html">
+   About
+  </a>
+<input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+<label for="toctree-checkbox-10">
+<i class="fas fa-chevron-down">
+</i>
+</label>
+<ul>
+<li class="toctree-l2">
+<a class="reference internal" href="../../about/comparisons.html">
+     Comparisons
+    </a>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</nav>
+</div>
+<div class="sidebar-end-items">
+</div>
+</div>
+<div class="bd-sidebar-secondary d-none d-xl-block col-xl-2 bd-toc">
+<div class="toc-item">
+<div class="tocsection onthispage mt-5 pt-1 pb-3">
+<i class="fas fa-list"></i> On this page
+</div>
+<nav id="bd-toc-nav">
+<ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#streaming-video-live-video-streams-made-easy">
+   Streaming Video: Live video streams made easy
+  </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#imports-and-settings">
+   Imports and Settings
+  </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#base-image-models">
+   Base Image Models
+  </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#timer">
+   Timer
+  </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#videostreaminterface">
+   VideoStreamInterface
+  </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#custom-image-models">
+   Custom Image Models
+  </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#its-alive">
+   Its alive!
+  </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#wrap-it-in-a-template">
+   Wrap it in a template
+  </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#serve-it-as-a-server-side-app">
+   Serve it as a server side app
+  </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#serve-it-as-a-client-side-app">
+   Serve it as a client side app
+  </a>
+</li>
+</ul>
+</nav>
+</div>
+<div class="toc-item">
+</div>
+</div>
+<div class="bd-content col-12 col-md-10 col-xl-8" role="main">
+<article class="bd-article" role="main">
+<section id="streaming-videostream">
+<h1>Streaming Videostream<a class="headerlink" href="#streaming-videostream" title="Permalink to this heading">#</a></h1>
+<p><a class="reference external" href="https://raw.githubusercontent.com/holoviz/panel/main/examples/gallery/streaming/streaming_videostream.ipynb">Download this notebook from GitHub (right-click to download).</a></p>
+<hr class="docutils"/>
+<section id="streaming-video-live-video-streams-made-easy">
+<h2>Streaming Video: Live video streams made easy<a class="headerlink" href="#streaming-video-live-video-streams-made-easy" title="Permalink to this heading">#</a></h2>
+<p>In this example we will demonstrate how to develop a general tool to transform live image streams from the users web cam. We will be using Panels
+<a class="reference external" href="https://panel.holoviz.org/reference/widgets/VideoStream.html"><code class="docutils literal notranslate"><span class="pre">VideoStream</span></code></a> widget to record and stream the images.</p>
+<p><img alt="VideoStreamInterfaceSobel" src="assets/VideoStreamInterfaceSobel.jpg"/></p>
+<p>We will also show how to apply <em>blur</em>, <em>grayscale</em>, <em>sobel</em> and <em>face recognition</em> models to the video stream.</p>
+</section>
+<section id="imports-and-settings">
+<h2>Imports and Settings<a class="headerlink" href="#imports-and-settings" title="Permalink to this heading">#</a></h2>
+<p>Among other things we will be using <a class="reference external" href="https://numpy.org/">numpy</a>, <a class="reference external" href="https://pillow.readthedocs.io/en/stable/">PIL</a> and <a class="reference external" href="https://scikit-image.org/">scikit-image</a> to work with the images.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">base64</span>
+<span class="kn">import</span> <span class="nn">io</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">param</span>
+<span class="kn">import</span> <span class="nn">PIL</span>
+<span class="kn">import</span> <span class="nn">skimage</span>
+
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">ImageFilter</span>
+<span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">data</span><span class="p">,</span> <span class="n">filters</span>
+<span class="kn">from</span> <span class="nn">skimage.color.adapt_rgb</span> <span class="kn">import</span> <span class="n">adapt_rgb</span><span class="p">,</span> <span class="n">each_channel</span>
+<span class="kn">from</span> <span class="nn">skimage.draw</span> <span class="kn">import</span> <span class="n">rectangle</span>
+<span class="kn">from</span> <span class="nn">skimage.exposure</span> <span class="kn">import</span> <span class="n">rescale_intensity</span>
+<span class="kn">from</span> <span class="nn">skimage.feature</span> <span class="kn">import</span> <span class="n">Cascade</span>
+
+<span class="kn">import</span> <span class="nn">panel</span> <span class="k">as</span> <span class="nn">pn</span>
+
+<span class="n">pn</span><span class="o">.</span><span class="n">extension</span><span class="p">(</span><span class="n">sizing_mode</span><span class="o">=</span><span class="s2">"stretch_width"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We define the <em>height</em> and <em>width</em> of the images to transform. Smaller is faster.
+We also define the <em>timeout</em>, i.e. how often the videostream takes and streams a new image.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">HEIGHT</span> <span class="o">=</span> <span class="mi">500</span> <span class="c1"># pixels</span>
+<span class="n">WIDTH</span> <span class="o">=</span> <span class="mi">500</span> <span class="c1"># pixels</span>
+<span class="n">TIMEOUT</span> <span class="o">=</span> <span class="mi">500</span> <span class="c1"># miliseconds</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="base-image-models">
+<h2>Base Image Models<a class="headerlink" href="#base-image-models" title="Permalink to this heading">#</a></h2>
+<p>We will need to define some <em>base image models</em> components. The base models are custom Panel components that inherit from Panels <a class="reference external" href="https://panel.holoviz.org/user_guide/Custom_Components.html#viewer-components"><code class="docutils literal notranslate"><span class="pre">Viewer</span></code></a> class.</p>
+<p>The <em>base models</em> makes it easy to later turn <em>image to image</em> algorithms into interactive UIs like the <code class="docutils literal notranslate"><span class="pre">FaceDetectionModel</span></code> shown in the image just below.</p>
+<p><img alt="VideoStreamInterfaceTimer" src="assets/VideoStreamInterfaceFaceDetectionViewer.jpg"/></p>
+<p>Please note we restrict our selves to working with <code class="docutils literal notranslate"><span class="pre">.jpg</span></code> images. The <code class="docutils literal notranslate"><span class="pre">VideoStream</span></code> widget also support <code class="docutils literal notranslate"><span class="pre">.png</span></code> images. But <code class="docutils literal notranslate"><span class="pre">.png</span></code> images are much bigger and slower to work with.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ImageModel</span><span class="p">(</span><span class="n">pn</span><span class="o">.</span><span class="n">viewable</span><span class="o">.</span><span class="n">Viewer</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Base class for image models."""</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">params</span><span class="p">)</span>
+
+        <span class="k">with</span> <span class="n">param</span><span class="o">.</span><span class="n">edit_constant</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"Model"</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">view</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_view</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">__panel__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span>
+
+    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">height</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">HEIGHT</span><span class="p">,</span> <span class="n">width</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">WIDTH</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Transforms a base64 encoded jpg image to a base64 encoded jpg BytesIO object"""</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">create_view</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Creates a view of the parameters of the transform to enable the user to configure them"""</span>
+        <span class="k">return</span> <span class="n">pn</span><span class="o">.</span><span class="n">Param</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Transforms the image"""</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Lets define a base model for working with <strong><code class="docutils literal notranslate"><span class="pre">PIL</span></code></strong> images</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">PILImageModel</span><span class="p">(</span><span class="n">ImageModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Base class for PIL image models"""</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">to_pil_img</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="n">HEIGHT</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">WIDTH</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Converts a base64 jpeg image string to a PIL.Image"""</span>
+        <span class="n">encoded_data</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">","</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">base64_decoded</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64decode</span><span class="p">(</span><span class="n">encoded_data</span><span class="p">)</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">(</span><span class="n">base64_decoded</span><span class="p">))</span>
+        <span class="n">image</span><span class="o">.</span><span class="n">draft</span><span class="p">(</span><span class="s2">"RGB"</span><span class="p">,</span> <span class="p">(</span><span class="n">height</span><span class="p">,</span> <span class="n">width</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">image</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">from_pil_img</span><span class="p">(</span><span class="n">image</span><span class="p">:</span> <span class="n">Image</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Converts a PIL.Image to a base64 encoded JPG BytesIO object"""</span>
+        <span class="n">buff</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">()</span>
+        <span class="n">image</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">buff</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">"JPEG"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">buff</span>
+
+    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">height</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">HEIGHT</span><span class="p">,</span> <span class="n">width</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">WIDTH</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">:</span>
+        <span class="n">pil_img</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_pil_img</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="n">height</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">)</span>
+
+        <span class="n">transformed_image</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">pil_img</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">from_pil_img</span><span class="p">(</span><span class="n">transformed_image</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image</span><span class="p">:</span> <span class="n">PIL</span><span class="o">.</span><span class="n">Image</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PIL</span><span class="o">.</span><span class="n">Image</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Transforms the PIL.Image image"""</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Lets define a base model for working with <strong><code class="docutils literal notranslate"><span class="pre">Numpy</span></code></strong> images.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">NumpyImageModel</span><span class="p">(</span><span class="n">ImageModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Base class for np.ndarray image models"""</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">to_np_ndarray</span><span class="p">(</span><span class="n">image</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="n">HEIGHT</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">WIDTH</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Converts a base64 encoded jpeg string to a np.ndarray"""</span>
+        <span class="n">pil_img</span> <span class="o">=</span> <span class="n">PILImageModel</span><span class="o">.</span><span class="n">to_pil_img</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="n">height</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pil_img</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">from_np_ndarray</span><span class="p">(</span><span class="n">image</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Converts np.ndarray jpeg image to a jpeg BytesIO instance"""</span>
+        <span class="k">if</span> <span class="n">image</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s2">"float64"</span><span class="p">):</span>
+            <span class="n">image</span> <span class="o">=</span> <span class="p">(</span><span class="n">image</span> <span class="o">*</span> <span class="mi">255</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+        <span class="n">pil_img</span> <span class="o">=</span> <span class="n">PIL</span><span class="o">.</span><span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">PILImageModel</span><span class="o">.</span><span class="n">from_pil_img</span><span class="p">(</span><span class="n">pil_img</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">height</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">HEIGHT</span><span class="p">,</span> <span class="n">width</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">WIDTH</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">:</span>
+        <span class="n">np_array</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_np_ndarray</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="n">height</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">)</span>
+
+        <span class="n">transformed_image</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">np_array</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">from_np_ndarray</span><span class="p">(</span><span class="n">transformed_image</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Transforms the np.array image"""</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="timer">
+<h2>Timer<a class="headerlink" href="#timer" title="Permalink to this heading">#</a></h2>
+<p>Lets define a timer component to visualize the stats of the live videostream and the image transformations</p>
+<p><img alt="VideoStreamInterfaceTimer" src="assets/VideoStreamInterfaceTimer.jpg"/></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Timer</span><span class="p">(</span><span class="n">pn</span><span class="o">.</span><span class="n">viewable</span><span class="o">.</span><span class="n">Viewer</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Helper Component used to show duration trends"""</span>
+
+    <span class="n">_trends</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">Dict</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_updates</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_trends</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_layout</span> <span class="o">=</span> <span class="n">pn</span><span class="o">.</span><span class="n">Row</span><span class="p">(</span><span class="o">**</span><span class="n">params</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">time_it</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Measures the duration of the execution of the func function and reports it under the</span>
+<span class="sd">        name specified"""</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="n">duration</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_report</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">duration</span><span class="o">=</span><span class="n">duration</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span>
+
+    <span class="k">def</span> <span class="nf">inc_it</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Measures the duration since the last time `inc_it` was called and reports it under the</span>
+<span class="sd">        specified name"""</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_updates</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">())</span>
+        <span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="n">duration</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_report</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">duration</span><span class="o">=</span><span class="n">duration</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_updates</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">end</span>
+
+    <span class="k">def</span> <span class="nf">_report</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">duration</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_trends</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_trends</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">pn</span><span class="o">.</span><span class="n">indicators</span><span class="o">.</span><span class="n">Trend</span><span class="p">(</span>
+                <span class="n">title</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
+                <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s2">"x"</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">"y"</span><span class="p">:</span> <span class="p">[</span><span class="n">duration</span><span class="p">]},</span>
+                <span class="n">height</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+                <span class="n">width</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span>
+                <span class="n">sizing_mode</span><span class="o">=</span><span class="s2">"fixed"</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">param</span><span class="o">.</span><span class="n">trigger</span><span class="p">(</span><span class="s2">"_trends"</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">trend</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_trends</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+            <span class="n">next_x</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">trend</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">"x"</span><span class="p">])</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="n">trend</span><span class="o">.</span><span class="n">stream</span><span class="p">({</span><span class="s2">"x"</span><span class="p">:</span> <span class="p">[</span><span class="n">next_x</span><span class="p">],</span> <span class="s2">"y"</span><span class="p">:</span> <span class="p">[</span><span class="n">duration</span><span class="p">]},</span> <span class="n">rollover</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+    <span class="nd">@pn</span><span class="o">.</span><span class="n">depends</span><span class="p">(</span><span class="s2">"_trends"</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">_panel</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_layout</span><span class="p">[:]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_trends</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_layout</span>
+
+    <span class="k">def</span> <span class="nf">__panel__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">pn</span><span class="o">.</span><span class="n">panel</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_panel</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="videostreaminterface">
+<h2>VideoStreamInterface<a class="headerlink" href="#videostreaminterface" title="Permalink to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">VideoStreamInterface</span></code> will be putting things together in a nice UI.</p>
+<p><img alt="VideoStreamInterfaceSobel" src="assets/VideoStreamInterfaceSobel.jpg"/></p>
+<p>Lets define a helper function first</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">to_instance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Converts the value to an instance</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        value: A param.Parameterized class or instance</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        An instance of the param.Parameterized class</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">param</span><span class="o">.</span><span class="n">Parameterized</span><span class="p">):</span>
+        <span class="n">value</span><span class="o">.</span><span class="n">param</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="o">**</span><span class="n">params</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">value</span>
+    <span class="k">return</span> <span class="n">value</span><span class="p">(</span><span class="o">**</span><span class="n">params</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">VideoStreamInterface</span></code> will take a list of <code class="docutils literal notranslate"><span class="pre">ImageModel</span></code>s. The user can the select and apply the models to the images from the <code class="docutils literal notranslate"><span class="pre">VideoStream</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">VideoStreamInterface</span><span class="p">(</span><span class="n">pn</span><span class="o">.</span><span class="n">viewable</span><span class="o">.</span><span class="n">Viewer</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""An easy to use interface for a VideoStream and a set of transforms"""</span>
+
+    <span class="n">video_stream</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">ClassSelector</span><span class="p">(</span>
+        <span class="n">class_</span><span class="o">=</span><span class="n">pn</span><span class="o">.</span><span class="n">widgets</span><span class="o">.</span><span class="n">VideoStream</span><span class="p">,</span> <span class="n">constant</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="s2">"The source VideoStream"</span>
+    <span class="p">)</span>
+
+    <span class="n">height</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">Integer</span><span class="p">(</span>
+        <span class="n">HEIGHT</span><span class="p">,</span>
+        <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">2000</span><span class="p">),</span>
+        <span class="n">step</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+        <span class="n">doc</span><span class="o">=</span><span class="s2">"""The height of the image converted and shown"""</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">width</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">Integer</span><span class="p">(</span>
+        <span class="n">WIDTH</span><span class="p">,</span>
+        <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">2000</span><span class="p">),</span>
+        <span class="n">step</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+        <span class="n">doc</span><span class="o">=</span><span class="s2">"""The width of the image converted and shown"""</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">model</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">Selector</span><span class="p">(</span><span class="n">doc</span><span class="o">=</span><span class="s2">"The currently selected model"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">models</span><span class="p">,</span>
+        <span class="n">timeout</span><span class="o">=</span><span class="n">TIMEOUT</span><span class="p">,</span>
+        <span class="n">paused</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">params</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">video_stream</span><span class="o">=</span><span class="n">pn</span><span class="o">.</span><span class="n">widgets</span><span class="o">.</span><span class="n">VideoStream</span><span class="p">(</span>
+                <span class="n">name</span><span class="o">=</span><span class="s2">"Video Stream"</span><span class="p">,</span>
+                <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span>
+                <span class="n">paused</span><span class="o">=</span><span class="n">paused</span><span class="p">,</span>
+                <span class="n">height</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                <span class="n">width</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                <span class="n">visible</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                <span class="nb">format</span><span class="o">=</span><span class="s2">"jpeg"</span><span class="p">,</span>
+            <span class="p">),</span>
+            <span class="o">**</span><span class="n">params</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">image</span> <span class="o">=</span> <span class="n">pn</span><span class="o">.</span><span class="n">pane</span><span class="o">.</span><span class="n">JPG</span><span class="p">(</span>
+            <span class="n">height</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="n">sizing_mode</span><span class="o">=</span><span class="s2">"fixed"</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_updating</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">models</span> <span class="o">=</span> <span class="p">[</span><span class="n">to_instance</span><span class="p">(</span><span class="n">model</span><span class="p">)</span> <span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">models</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">param</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">objects</span> <span class="o">=</span> <span class="n">models</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">models</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">timer</span> <span class="o">=</span> <span class="n">Timer</span><span class="p">(</span><span class="n">sizing_mode</span><span class="o">=</span><span class="s2">"stretch_width"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">settings</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_settings</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_panel</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_panel</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_create_settings</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">pn</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span>
+            <span class="n">pn</span><span class="o">.</span><span class="n">Param</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">video_stream</span><span class="p">,</span>
+                <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="s2">"timeout"</span><span class="p">,</span> <span class="s2">"paused"</span><span class="p">],</span>
+                <span class="n">widgets</span><span class="o">=</span><span class="p">{</span>
+                    <span class="s2">"timeout"</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="s2">"widget_type"</span><span class="p">:</span> <span class="n">pn</span><span class="o">.</span><span class="n">widgets</span><span class="o">.</span><span class="n">IntSlider</span><span class="p">,</span>
+                        <span class="s2">"start"</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+                        <span class="s2">"end"</span><span class="p">:</span> <span class="mi">2000</span><span class="p">,</span>
+                        <span class="s2">"step"</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+                    <span class="p">}</span>
+                <span class="p">},</span>
+            <span class="p">),</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">timer</span><span class="p">,</span>
+            <span class="n">pn</span><span class="o">.</span><span class="n">Param</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="s2">"height"</span><span class="p">,</span> <span class="s2">"width"</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s2">"Image"</span><span class="p">),</span>
+            <span class="n">pn</span><span class="o">.</span><span class="n">Param</span><span class="p">(</span>
+                <span class="bp">self</span><span class="p">,</span>
+                <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="s2">"model"</span><span class="p">],</span>
+                <span class="n">expand_button</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                <span class="n">expand</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                <span class="n">widgets</span><span class="o">=</span><span class="p">{</span>
+                    <span class="s2">"model"</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="s2">"widget_type"</span><span class="p">:</span> <span class="n">pn</span><span class="o">.</span><span class="n">widgets</span><span class="o">.</span><span class="n">RadioButtonGroup</span><span class="p">,</span>
+                        <span class="s2">"orientation"</span><span class="p">:</span> <span class="s2">"vertical"</span><span class="p">,</span>
+                        <span class="s2">"button_type"</span><span class="p">:</span> <span class="s2">"success"</span><span class="p">,</span>
+                    <span class="p">}</span>
+                <span class="p">},</span>
+                <span class="n">name</span><span class="o">=</span><span class="s2">"Model"</span><span class="p">,</span>
+            <span class="p">),</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_get_transform</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_create_panel</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">pn</span><span class="o">.</span><span class="n">Row</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">video_stream</span><span class="p">,</span>
+            <span class="n">pn</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">HSpacer</span><span class="p">(),</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">image</span><span class="p">,</span>
+            <span class="n">pn</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">HSpacer</span><span class="p">(),</span>
+            <span class="n">sizing_mode</span><span class="o">=</span><span class="s2">"stretch_width"</span><span class="p">,</span>
+            <span class="n">align</span><span class="o">=</span><span class="s2">"center"</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="nd">@pn</span><span class="o">.</span><span class="n">depends</span><span class="p">(</span><span class="s2">"height"</span><span class="p">,</span> <span class="s2">"width"</span><span class="p">,</span> <span class="n">watch</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">_update_height_width</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">height</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span>
+
+    <span class="nd">@pn</span><span class="o">.</span><span class="n">depends</span><span class="p">(</span><span class="s2">"model"</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">_get_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Hack: returning self.transform stops working after browsing the transforms for a while</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">view</span>
+
+    <span class="k">def</span> <span class="nf">__panel__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_panel</span>
+
+    <span class="nd">@pn</span><span class="o">.</span><span class="n">depends</span><span class="p">(</span><span class="s2">"video_stream.value"</span><span class="p">,</span> <span class="n">watch</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">_handle_stream</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_updating</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_updating</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">video_stream</span><span class="o">.</span><span class="n">value</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">video_stream</span><span class="o">.</span><span class="n">value</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">image</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">timer</span><span class="o">.</span><span class="n">time_it</span><span class="p">(</span>
+                    <span class="n">name</span><span class="o">=</span><span class="s2">"Model"</span><span class="p">,</span>
+                    <span class="n">func</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">apply</span><span class="p">,</span>
+                    <span class="n">image</span><span class="o">=</span><span class="n">value</span><span class="p">,</span>
+                    <span class="n">height</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">,</span>
+                    <span class="n">width</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">object</span> <span class="o">=</span> <span class="n">image</span>
+            <span class="k">except</span> <span class="n">PIL</span><span class="o">.</span><span class="n">UnidentifiedImageError</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">"unidentified image"</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">timer</span><span class="o">.</span><span class="n">inc_it</span><span class="p">(</span><span class="s2">"Last Update"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_updating</span> <span class="o">=</span> <span class="kc">False</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="custom-image-models">
+<h2>Custom Image Models<a class="headerlink" href="#custom-image-models" title="Permalink to this heading">#</a></h2>
+<p>We will now make specific image to image algorithms interactive.</p>
+<p>Let us start with the <a class="reference external" href="https://pillow.readthedocs.io/en/stable/reference/ImageFilter.html#PIL.ImageFilter.GaussianBlur">Gaussian Blur</a> algorithm.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">GaussianBlurModel</span><span class="p">(</span><span class="n">PILImageModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Gaussian Blur Model</span>
+
+<span class="sd">    https://pillow.readthedocs.io/en/stable/reference/ImageFilter.html#PIL.ImageFilter.GaussianBlur</span>
+<span class="sd">    """</span>
+
+    <span class="n">radius</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">Integer</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image</span><span class="p">:</span> <span class="n">Image</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">image</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">ImageFilter</span><span class="o">.</span><span class="n">GaussianBlur</span><span class="p">(</span><span class="n">radius</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Lets implement a <a class="reference external" href="https://scikit-image.org/docs/0.15.x/auto_examples/color_exposure/plot_rgb_to_gray.html">Grayscale</a> algorithm.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">GrayscaleModel</span><span class="p">(</span><span class="n">NumpyImageModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""GrayScale Model</span>
+
+<span class="sd">    https://scikit-image.org/docs/0.15.x/auto_examples/color_exposure/plot_rgb_to_gray.html</span>
+<span class="sd">    """</span>
+
+    <span class="k">def</span> <span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+        <span class="n">grayscale</span> <span class="o">=</span> <span class="n">skimage</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">rgb2gray</span><span class="p">(</span><span class="n">image</span><span class="p">[:,</span> <span class="p">:,</span> <span class="p">:</span><span class="mi">3</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">skimage</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">gray2rgb</span><span class="p">(</span><span class="n">grayscale</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Lets implement the <a class="reference external" href="https://scikit-image.org/docs/0.15.x/auto_examples/color_exposure/plot_adapt_rgb.html">Sobel</a> algorithm.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SobelModel</span><span class="p">(</span><span class="n">NumpyImageModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Sobel Model</span>
+
+<span class="sd">    https://scikit-image.org/docs/0.15.x/auto_examples/color_exposure/plot_adapt_rgb.html</span>
+<span class="sd">    """</span>
+    <span class="k">def</span> <span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image</span><span class="p">):</span>
+
+
+        <span class="nd">@adapt_rgb</span><span class="p">(</span><span class="n">each_channel</span><span class="p">)</span>
+        <span class="k">def</span> <span class="nf">sobel_each</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">filters</span><span class="o">.</span><span class="n">sobel</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">rescale_intensity</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">sobel_each</span><span class="p">(</span><span class="n">image</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Lets implement the <a class="reference external" href="https://scikit-image.org/docs/0.15.x/auto_examples/applications/plot_face_detection.html">face detection model</a> of scikit-image.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@pn</span><span class="o">.</span><span class="n">cache</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">get_detector</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">"""Returns the Cascade detector"""</span>
+    <span class="n">trained_file</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">lbp_frontal_face_cascade_filename</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">Cascade</span><span class="p">(</span><span class="n">trained_file</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">FaceDetectionModel</span><span class="p">(</span><span class="n">NumpyImageModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Face detection using a cascade classifier.</span>
+
+<span class="sd">    https://scikit-image.org/docs/0.15.x/auto_examples/applications/plot_face_detection.html</span>
+<span class="sd">    """</span>
+
+    <span class="n">scale_factor</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">Number</span><span class="p">(</span><span class="mf">1.4</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">),</span> <span class="n">step</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+    <span class="n">step_ratio</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+    <span class="n">size_x</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">Range</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="mi">322</span><span class="p">),</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">500</span><span class="p">))</span>
+    <span class="n">size_y</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">Range</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="mi">322</span><span class="p">),</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">500</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image</span><span class="p">):</span>
+        <span class="n">detector</span> <span class="o">=</span> <span class="n">get_detector</span><span class="p">()</span>
+        <span class="n">detected</span> <span class="o">=</span> <span class="n">detector</span><span class="o">.</span><span class="n">detect_multi_scale</span><span class="p">(</span>
+            <span class="n">img</span><span class="o">=</span><span class="n">image</span><span class="p">,</span>
+            <span class="n">scale_factor</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">scale_factor</span><span class="p">,</span>
+            <span class="n">step_ratio</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">step_ratio</span><span class="p">,</span>
+            <span class="n">min_size</span><span class="o">=</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">size_x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">size_y</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+            <span class="n">max_size</span><span class="o">=</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">size_x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">size_y</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
+        <span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">patch</span> <span class="ow">in</span> <span class="n">detected</span><span class="p">:</span>
+            <span class="n">rrr</span><span class="p">,</span> <span class="n">ccc</span> <span class="o">=</span> <span class="n">rectangle</span><span class="p">(</span>
+                <span class="n">start</span><span class="o">=</span><span class="p">(</span><span class="n">patch</span><span class="p">[</span><span class="s2">"r"</span><span class="p">],</span> <span class="n">patch</span><span class="p">[</span><span class="s2">"c"</span><span class="p">]),</span>
+                <span class="n">extent</span><span class="o">=</span><span class="p">(</span><span class="n">patch</span><span class="p">[</span><span class="s2">"height"</span><span class="p">],</span> <span class="n">patch</span><span class="p">[</span><span class="s2">"width"</span><span class="p">]),</span>
+                <span class="n">shape</span><span class="o">=</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="mi">2</span><span class="p">],</span>
+            <span class="p">)</span>
+            <span class="n">image</span><span class="p">[</span><span class="n">rrr</span><span class="p">,</span> <span class="n">ccc</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">200</span>
+
+        <span class="k">return</span> <span class="n">image</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Please note that these models are just examples. You can also implement your own models using Scikit-Image, Pytorch, Tensorflow etc and use the <code class="docutils literal notranslate"><span class="pre">VideoStreamInterface</span></code> to work interactively with them.</p>
+</section>
+<section id="its-alive">
+<h2>Its alive!<a class="headerlink" href="#its-alive" title="Permalink to this heading">#</a></h2>
+<p>Lets define an instance of the <code class="docutils literal notranslate"><span class="pre">VideoStreamInterface</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">component</span> <span class="o">=</span> <span class="n">VideoStreamInterface</span><span class="p">(</span>
+    <span class="n">models</span><span class="o">=</span><span class="p">[</span>
+        <span class="n">GaussianBlurModel</span><span class="p">,</span>
+        <span class="n">GrayscaleModel</span><span class="p">,</span>
+        <span class="n">SobelModel</span><span class="p">,</span>
+        <span class="n">FaceDetectionModel</span><span class="p">,</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+<span class="n">pn</span><span class="o">.</span><span class="n">Row</span><span class="p">(</span><span class="n">pn</span><span class="o">.</span><span class="n">Row</span><span class="p">(</span><span class="n">component</span><span class="o">.</span><span class="n">settings</span><span class="p">,</span> <span class="n">max_width</span><span class="o">=</span><span class="mi">400</span><span class="p">),</span> <span class="n">component</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="wrap-it-in-a-template">
+<h2>Wrap it in a template<a class="headerlink" href="#wrap-it-in-a-template" title="Permalink to this heading">#</a></h2>
+<p>What makes Panel unique is that our components work very well in both the notebook and as standalone data apps.</p>
+<p>We can wrap the component in the nicely styled <a class="reference external" href="https://panel.holoviz.org/reference/templates/FastListTemplate.html"><code class="docutils literal notranslate"><span class="pre">FastListTemplate</span></code></a> to make it <em>ready for production</em>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pn</span><span class="o">.</span><span class="n">template</span><span class="o">.</span><span class="n">FastListTemplate</span><span class="p">(</span>
+    <span class="n">site</span><span class="o">=</span><span class="s2">"Panel"</span><span class="p">,</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">"VideoStream Interface"</span><span class="p">,</span>
+    <span class="n">sidebar</span><span class="o">=</span><span class="p">[</span><span class="n">component</span><span class="o">.</span><span class="n">settings</span><span class="p">],</span>
+    <span class="n">main</span><span class="o">=</span><span class="p">[</span><span class="n">component</span><span class="p">],</span>
+<span class="p">)</span><span class="o">.</span><span class="n">servable</span><span class="p">();</span> <span class="c1"># We add ; to not show the template in the notebook as it does not display well.</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="serve-it-as-a-server-side-app">
+<h2>Serve it as a server side app<a class="headerlink" href="#serve-it-as-a-server-side-app" title="Permalink to this heading">#</a></h2>
+<p>It is now possible to serve the live app via the command <code class="docutils literal notranslate"><span class="pre">panel</span> <span class="pre">serve</span> <span class="pre">streaming_videostream.ipynb</span></code>. The app is the available at http://localhost:5006/streaming_videostream.</p>
+<p><img src="../../assets/VideoStreamInterface.jpg" style="max-height:500px"/></p>
+</section>
+<section id="serve-it-as-a-client-side-app">
+<h2>Serve it as a client side app<a class="headerlink" href="#serve-it-as-a-client-side-app" title="Permalink to this heading">#</a></h2>
+<p>You can also <a class="reference external" href="https://panel.holoviz.org/user_guide/Running_in_Webassembly.html"><code class="docutils literal notranslate"><span class="pre">panel</span> <span class="pre">convert</span></code></a> this app to web assembly for even better performance.</p>
+<p>First you will need to create a <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> file with the following content</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>panel
+numpy
+scikit-image
+</pre></div>
+</div>
+<p>Then you can</p>
+<ul class="simple">
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">panel</span> <span class="pre">convert</span> <span class="pre">streaming_videostream.ipynb</span> <span class="pre">--to</span> <span class="pre">pyodide-worker</span> <span class="pre">--out</span> <span class="pre">pyodide</span> <span class="pre">--requirements</span> <span class="pre">requirements.txt</span></code></p></li>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">-m</span> <span class="pre">http.server</span></code> to start a web server locally</p></li>
+<li><p>Open http://localhost:8000/pyodide/streaming_videostream.html to try out the app.</p></li>
+</ul>
+</section>
+<div id="scroller-right">This web page was generated from a Jupyter notebook and not all interactivity will work on this website. <a href="https://raw.githubusercontent.com/holoviz/panel/v0.14.4/examples/gallery/streaming/streaming_videostream.ipynb">Right click to download and run locally</a> for full Python-backed interactivity.</div><style>
+  .iframe-container {
+    overflow: hidden;
+    padding-top: 56.25%;
+    position: relative;
+    background: url(https://assets.holoviews.org/static/spinner.gif) center center no-repeat;
+  }
+
+  .iframe-container iframe {
+    border: 0;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+</style>
+<div class="iframe-container">
+<iframe frameborder="0" onload="this.parentNode.style.background = 'none'" src="https://panel-gallery.pyviz.demo.anaconda.com/streaming_videostream" width="100%"></iframe>
+</div><hr class="docutils"/>
+<p><a class="reference external" href="https://raw.githubusercontent.com/holoviz/panel/main/examples/gallery/streaming/streaming_videostream.ipynb">Download this notebook from GitHub (right-click to download).</a></p>
+</section>
+</article>
+<footer class="bd-footer-article">
+<!-- Previous / next buttons -->
+<div class="prev-next-area">
+<a class="left-prev" href="streaming_tabulator.html" id="prev-link" title="previous page">
+<i class="fas fa-angle-left"></i>
+<div class="prev-next-info">
+<p class="prev-next-subtitle">previous</p>
+<p class="prev-next-title">Streaming Tabulator</p>
+</div>
+</a>
+<a class="right-next" href="../components/CanvasDraw.html" id="next-link" title="next page">
+<div class="prev-next-info">
+<p class="prev-next-subtitle">next</p>
+<p class="prev-next-title">CanvasDraw</p>
+</div>
+<i class="fas fa-angle-right"></i>
+</a>
+</div>
+</footer>
+</div>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=92025949c220c2e29695"></script>
+<footer class="bd-footer"><div class="bd-footer__inner container">
+<div class="footer-item">
+<p class="copyright">
+    © Copyright 2019-2023 Holoviz contributors.<br/>
+</p>
+</div>
+<div class="footer-item">
+<p class="last-updated">
+Last updated on 2023-03-03.<br/>
+</p>
+</div>
+</div>
+</footer>
+</body>
+</html>
