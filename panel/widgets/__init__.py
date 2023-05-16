@@ -47,6 +47,7 @@ from .input import (  # noqa
     FloatInput, IntInput, LiteralInput, NumberInput, PasswordInput, Spinner,
     StaticText, Switch, TextAreaInput, TextInput,
 )
+from .jstree import FileTree  # noqa
 from .misc import FileDownload, JSONEditor, VideoStream  # noqa
 from .player import DiscretePlayer, Player  # noqa
 from .select import (  # noqa
@@ -98,6 +99,7 @@ __all__ = (
     "FileDownload",
     "FileInput",
     "FileSelector",
+    "FileTree",
     "FloatInput",
     "FloatSlider",
     "Gauge",

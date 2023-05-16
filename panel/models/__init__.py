@@ -7,6 +7,7 @@ files.
 
 from .datetime_picker import DatetimePicker  # noqa
 from .ipywidget import IPyWidget  # noqa
+from .jstree import jsTreePlot  # noqa
 from .layout import Card  # noqa
 from .location import Location  # noqa
 from .markup import HTML, JSON, PDF  # noqa
