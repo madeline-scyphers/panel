@@ -186,7 +186,7 @@ export class jsTreePlot extends HTMLBox {
         super(attrs)
     }
 
-    static __module__ = "panel_jstree.bokeh_extensions.jstree"
+    static __module__ = "panel.models.jstree"
 
     static init_jsTreePlot(): void {
         this.prototype.default_view = jsTreePlotView
