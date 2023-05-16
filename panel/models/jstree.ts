@@ -40,22 +40,15 @@ export class jsTreePlotView extends HTMLBoxView {
         console.log(this.model.show_dots)
         console.log(this.model.show_icons)
     }
-    //
+
     render(): void {
         super.render()
 
         this._id = ID()
         console.log(this._id)
 
-        // this._container = div({id: this._id})
         this._container = div({id: this._id, })
-        // applyStyle(this._container, JSTREE_DIV_STYLES)
 
-
-        // this._jstree = jQuery('#'+this._id).jstree({ "core": { "data": this.model.data, "check_callback": true}, plugins: this.model.plugins});
-        // applyStyle(this.el, JSTREE_DIV_STYLES)
-        // set_size(this.el, this.model)
-        //if (!(this._container === this.el.childNodes[0]))
         this.el.appendChild(this._container);
 
         let kw = {}
@@ -79,33 +72,12 @@ export class jsTreePlotView extends HTMLBoxView {
             }
             );
 
-        // jQuery('#'+this._id).jstree({ "core": { "data": this.model.data, "check_callback": true}, plugins: this.model.plugins});
         jQuery('#'+this._id).on('changed.jstree', (e: any, data: any) => this._update_code_from_editor(e, data));
         jQuery('#'+this._id).on('before_open.jstree', (e: any, data: any) => this._listen_for_node_open(e, data));
         jQuery('#'+this._id).on('refresh.jstree', ({}, {}) => this._update_selection_from_value());
         jQuery('#'+this._id).on('create_node.jstree', ({}, {}) => this._update_selection_from_value());
 
     }
-    //
-    //   fit() {
-    //     const sizing = this.box_sizing();
-    //     const vert_margin = sizing.margin == null ? 0 : sizing.margin.top + sizing.margin.bottom;
-    //     const horz_margin = sizing.margin == null ? 0 : sizing.margin.left + sizing.margin.right;
-    //     const width = (this.layout.inner_bbox.width || this.model.width || 0) - horz_margin;
-    //     const height = (this.layout.inner_bbox.height || this.model.height || 0) - vert_margin;
-    //     const renderer = this.term._core._renderService;
-    //     const cell_width = renderer.dimensions.actualCellWidth || 9;
-    //     const cell_height = renderer.dimensions.actualCellHeight || 18;
-    //     if (width == null || height == null || width <= 0 || height <= 0)
-    //         return;
-    //     const cols = Math.max(2, Math.floor(width / cell_width));
-    //     const rows = Math.max(1, Math.floor(height / cell_height));
-    //     if (this.term.rows !== rows || this.term.cols !== cols)
-    //         this.term.resize(cols, rows);
-    //     this.model.ncols = cols;
-    //     this.model.nrows = rows;
-    //     this._rendered = true;
-    // }
 
     _update_code_from_editor({}, data: any): void {
         this.model.value = data.instance.get_selected();
